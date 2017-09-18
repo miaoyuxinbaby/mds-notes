@@ -17,6 +17,7 @@
 + npm install --save-dev css-loader style-loader
 + npm install postcss-loader --save-dev
 + npm install autoprefixer --save-dev
++ 有事没事看看webpack和npm官网，里面别有洞天
 
 
 ### webpack配置
@@ -151,4 +152,100 @@ module.exports = {
         })
     ]
 }
+```
+
++ less-loader    html-loader
+
+```
+    var htmlWebpackPlugin = require('html-webpack-plugin');
+
+    module.exports = {
+        entry: {
+            main: __dirname + '/src/app.js'
+        },
+        output: {
+            path: __dirname + '/dist',
+            filename: 'js/[name].bundle.js'
+        },
+        module: {
+            rules: [
+                {             // 每一项都是一条规则
+                    test: /\.js$/,
+                    loader: 'babel-loader',
+                    exclude: __dirname + '/node_modules/',    // 不扫描该目录下的文件
+                    include: __dirname + '/src/',    // 只扫描该目录下的文件
+                    options: {
+                        presets: ['latest']     // latest是ES2015以后的都转换
+                    }
+                },
+                {
+                    test: /\.html$/,
+                    use: {loader: 'html-loader'}
+                },
+                {
+                    test: /\.css$/,
+                    use: [
+                        'style-loader',
+                        'css-loader',
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: [require('autoprefixer')()]
+                            }
+                        }
+                    ]
+                },
+                {
+                    test: /\.less$/,
+                    use: [
+                        'style-loader',
+                        'css-loader',
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: [require('autoprefixer')()]
+                            }
+                        },
+                        'less-loader'
+                    ]
+                }   
+            ]
+        },
+        plugins: [
+            new htmlWebpackPlugin({
+                title: 'this is test',
+                filename: 'index.html',
+                template: 'index.html',
+                inject: true
+            })
+        ]
+    }
+```
+
++ 处理图片
++ npm install file-loader --save-dev 
+```
+    {
+        test: /\.(png|jpg|gif|svg)$/i,
+        use: ['file-loader'],
+        query: {
+            name: 'asset/[name]-[hash:5].[ext]'
+        }
+    }   
+```
++ url-loader --save-dev
+
+```
+    {
+        test: /\.(png|jpg|gif|svg)$/i,
+        use: [
+            {
+                loader: 'url-loader',
+                options: {
+                    limit: 2000000,    // 打包小于这个数值的图片
+                    name: 'asset/[name]-[hash:5].[ext]'
+                }
+            }
+        ]
+    }   
 ```
