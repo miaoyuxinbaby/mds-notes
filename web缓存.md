@@ -1,5 +1,5 @@
 # Web缓存 
-- study from by  www.alloyteam.com/2016/03/discussion-on-web-caching/
+- study from  www.alloyteam.com/2016/03/discussion-on-web-caching/
 ## 缓存分类
 + web缓存分为很多种，比如数据库缓存，代理服务器缓存，还有我们熟悉的CDN缓存，以及浏览器缓存
 
