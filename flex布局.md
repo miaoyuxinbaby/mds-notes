@@ -1,4 +1,5 @@
-# flex语法
+# flex语法笔记
+
 - 设置为Flex布局后，子元素的float、clear和vertical-align属性将失效。
 ```
      .box {
@@ -7,7 +8,7 @@
     }
 ```
 - 容器的所有子元素自动成为容器成员，称为Flex项目(flex item)
-- 主轴 main  交叉轴 cross  
+- 主轴 main  交叉轴 cross
 - 项目默认沿主轴排列，单个项目占据的主轴空间叫做main size,占据的交叉轴空间叫做cross size
 
 ### 容器的属性
