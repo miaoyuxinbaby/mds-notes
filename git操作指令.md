@@ -32,5 +32,3 @@ $ ssh-keygen -t rsa -C "your_email@youremail.com"
 局部设置git
 git config --local user.name "你的名字"
 git config --local user.email "你的邮箱"
-```
-...
