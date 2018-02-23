@@ -23,5 +23,14 @@ Git鼓励大量使用分支：
 合并某分支到当前分支：git merge <name>
 
 删除分支：git branch -d <name>
+
+git config -l 查看config配置
+
+创建SSH
+$ ssh-keygen -t rsa -C "your_email@youremail.com"
+
+局部设置git
+git config --local user.name "你的名字"
+git config --local user.email "你的邮箱"
 ```
 ...
