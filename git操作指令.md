@@ -32,3 +32,8 @@ $ ssh-keygen -t rsa -C "your_email@youremail.com"
 局部设置git
 git config --local user.name "你的名字"
 git config --local user.email "你的邮箱"
+
+##　HTTP请求gitlab时需要输入帐号密码： 偷懒方案
+
+在项目的 .git/config 里修改[remote "origin"]里的url <br>
+将原来的http://gitlab.*****.com修改为http://username:password@gitlab.*****.com
