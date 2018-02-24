@@ -24,6 +24,12 @@ Git鼓励大量使用分支：
 
 删除分支：git branch -d <name>
 
+存档现场 git stash 
+
+查看存档 git stash list 
+
+读取存档 git stash apply + git stash drop 或 git stash pop
+
 git config -l 查看config配置
 
 创建SSH
