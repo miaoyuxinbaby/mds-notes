@@ -36,6 +36,8 @@ babel-plugin-transform-runtime在.babelrc里配置plugin<br>
                                     targets: {
                                         browsers: ['> 1%', 'last 2 versions']
                                         // 浏览器市场占比1%以上的
+                                        // postcss等其他插件也会用到broswerslist
+                                        // 可以写在package.json或者.browserslistrc里面。让所有插件共用（自动查找）
                                     }
                                 }
                             ]
@@ -141,8 +143,9 @@ import(/* webpackChunkName: 'subPageA' */'./subPageA')
 
 ##### 处理CSS
 
-style-loader 把css变成style标签打入html
-css-loader 让js把css当作一个模块，可以import css。
+style-loader 把css变成style标签打入html <br>
+css-loader 让js把css当作一个模块，可以import css。<br>
+提取css的好处: 可以缓存，加速页面加载<br>
 
 - style-loader <br>
     options: <br>
@@ -164,4 +167,124 @@ css-loader 让js把css当作一个模块，可以import css。
     extract-loader (小众)
     ExtractTextWebpackPlugin (主流)
 
-提取css的好处: 可以缓存，加速页面加载
+```
+需要在html中写Link
+var ExtractTextWebpackPlugin = require('Extract-text-webpack-plugin')
+
+module: {
+    rules: [
+        {
+            test: /\.less$/,
+            use: ExtractTextWebpackPlugin.extract({
+                fallback: {
+                    loader: 'style-loader',
+                    options: {
+                        singleton: true
+                    }
+                },
+                use: [
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            minimize: true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            // 告诉webpack,下面引入的插件是给postcss用的。
+                            ident: 'postcss',
+                            plugins: [
+                                require('autoprefixer')()
+                            ]
+                        }
+                    },
+                    {
+                        loader: 'less-loader'
+                    }
+                ]
+            })
+        }
+    ]
+},
+plugins: [
+    new ExtractTextWebpackPlugin({
+        filename: '[name].min.css',
+        allChunks: false // 默认为false,异步加载的不打包。true则打包
+    })
+]
+```
+
+##### 关于tree-shaking
+
+摇树，在代码中就是把项目中不会执行的代码（没有机会执行的代码）删除
+
+- 使用场景 <br>
+    常规优化 - 代码体积减少<br>
+    引入第三方库的某一个功能<br>
+
+- js tree shaking
+
+借助Webpack.optimize.UglifyJsPlugin的帮助<br>
+第三方库需要支持ES module，比如Lodash本身是一个函数，所以无法删除无用代码。<br>
+可以选择lodash-es代替<br>
+目前github上关于lodash-es无法被webpack tree shaking 的 issue 还开着，说明有些库的写法webpack不支持<br>
+lodash-es可以用babel-plugin-lodash处理无用代码 配置示例如下： <br>
+
+```
+    // lodash-es处理
+    rules: [
+        {
+            test: /\.js$/,
+            use: [
+                {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env'],
+                        plugins: ['lodash']
+                    }
+                }
+            ]
+        }
+    ]
+
+    // 常规配置
+
+    var Webpack = require('webpack')
+
+    plugins: [
+        new Webpack.optimize.UglifyJsPlugin()
+    ]
+```
+
+- css tree shaking
+
+npm i purifycss-webpack glob-all --save-dev<br>
+
+purifycss-webpack <br>
+    options <br>
+    
+        paths: glob.sync([])
+
+```
+    var PurifyCss = require('purifycss-webpack')
+    var glob = require('glob-all')
+    var path = require('path')
+
+    plugins: [
+        // PurifyCss要写在ExtractTextWebpackPlugin后面，因为webpack的数组配置是从下往上执行
+        // 单独的文件这么配置
+        new PurifyCss({
+            paths: glob.sync([
+                path.resolve(__dirname, './index.html')
+            ])
+        })
+        // 包含很多文件这么配置
+        new PurifyCss({
+            paths: glob.sync([
+                path.join(__dirname, './index.html'),
+                path.join(__dirname, './src/*.js')
+            ])
+        })
+    ]
+```
