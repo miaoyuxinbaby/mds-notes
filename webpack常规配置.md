@@ -145,28 +145,35 @@ style-loader 把css变成style标签打入html <br>
 css-loader 让js把css当作一个模块，可以import css。<br>
 提取css的好处: 可以缓存，加速页面加载<br>
 
-- style-loader <br>
-    options: <br>
+- style-loader 
 
-        insertAt 插入位置<br>
-        insertInto 插入到哪个dom中<br>
-        singleton 是否只使用一个style标签<br>
+    options: 
+    ```
+        insertAt 插入位置
+        insertInto 插入到哪个dom中
+        singleton 是否只使用一个style标签
         transform: 一个js文件地址  转化，浏览器环境下，插入页面前执行文件中以commonjs方式导出的函数。 感觉没什么用
+    ```
 
-- css-loader <br>
-    options: <br>
+- css-loader 
 
-        alias 别名<br>
-        importLoader (@import)<br>
-        minimize 是否压缩<br>
+    options: 
+    ```
+        alias 别名
+        importLoader (@import)
+        minimize 是否压缩
         modules 是否启用css-modules 
+    ```
 
-- 提取css <br>
-    extract-loader (小众)
-    ExtractTextWebpackPlugin (主流)
+- 提取css 
 
 ```
-需要在html中写Link
+    extract-loader (小众) 
+    ExtractTextWebpackPlugin (主流)
+```
+
+```
+// 需要在html中写Link
 var ExtractTextWebpackPlugin = require('Extract-text-webpack-plugin')
 
 module: {
@@ -217,9 +224,12 @@ plugins: [
 
 摇树，在代码中就是把项目中不会执行的代码（没有机会执行的代码）删除
 
-- 使用场景 <br>
-    常规优化 - 代码体积减少<br>
-    引入第三方库的某一个功能<br>
+- 使用场景 
+
+```
+    常规优化 - 代码体积减少
+    引入第三方库的某一个功能
+```
 
 - js tree shaking
 
@@ -260,9 +270,10 @@ lodash-es可以用babel-plugin-lodash处理无用代码 配置示例如下： <b
 npm i purifycss-webpack glob-all --save-dev<br>
 
 purifycss-webpack <br>
-    options <br>
-
+    options 
+```
         paths: glob.sync([])
+```
 
 ```
     var PurifyCss = require('purifycss-webpack')
@@ -381,10 +392,11 @@ Base64编码       url-loader<br>
 
 ### 第三方JS库处理
 
-- webpack.ProvidePlugin <br>
+- webpack.ProvidePlugin 
     key 是alias value是包名（npm install的）
 
 ```
+// 如下配置，Jquery就可以直接在所有模块中使用$
 plugins: [
     new webpack.ProvidePlugin({
         $: 'jquery'
@@ -427,10 +439,11 @@ plugins: [
 
 ### HTML in webpack
 
-- 生成html <br>
+- 生成html
     HtmlWebpackPlugin<br>
-    options<br>
-        
+    options
+
+    ```
         // 标签页logo的位置
         favicon:'./src/images/favicon.ico',
 
@@ -451,8 +464,9 @@ plugins: [
 
         // 加载哪些entry chunk(也可以不是entry中的chunk,但要有name)
         chunks: ['vendors', 'resume']
+    ```
 
-- html中引入的图片 <br>
+- html中引入的图片 
     html-loaders <br>
     options <br>
 

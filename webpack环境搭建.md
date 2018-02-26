@@ -75,3 +75,96 @@ webpack -watch [参数] || webpack -w [参数] <br>
     }
   }
   ```
+
+- 代理远程接口请求
+
+    主流有2种，且配置基本一致  http-proxy-middleware 和 devServer.proxy <br>
+    options: 
+    ```
+      target: 指定代理的地址
+      changeOrigin: 默认是false
+      headers: {} 增加http请求头
+      logLevel： 在控制台显示代理信息
+      pathRewrite 帮助重定向接口的请求和apifallback很相似
+    ```
+
+  ```
+  devServer: {
+    prot: 9001,
+    proxy: {
+      '/': {
+        target: 'www.XXX.com',
+        changeOrigin: true,
+        logLevel: 'debug',
+        pathRewrite: {
+          '^/comments': '/api/comments'
+          // 把a映射成b
+        },
+        headers: {
+          'cookie': 'abcdefghigklmn'
+        }
+      }
+    }
+  }
+  ```
+
+- Module Hot Reloading
+
+  在不刷新浏览器的情况下更新前端代码
+  - 三个优势
+    - 保持应用的数据状态
+    - 节省调试时间
+    - 样式调试更快
+  - 模块热更新的css部分，是依赖style-loader。所以dev环境中一般不抽离出单独的css文件
+
+```
+devServer: {
+  hot: true
+},
+plugins: [
+  new Webpack.HotModuleReplacementPlugin(),
+  new Webpack.namedModulesPlugin()
+]
+```
+
+- Source Map调试
+
+devtool 有7个常用值，4个用于开发环境
+
+  - Development
+    - eval
+    - eval-source-map
+    - cheap-eval-source-map
+    - cheap-module-eval-source-map  
+  - Production
+    - source-map
+    - hidden-source-map
+    - nosource-source-map
+```
+css的sourcemap
+
+style-loader.option.sourcemap
+css-loader.option.sourcemap
+less-loader.option.sourcemap
+scss-loader.option.sourcemap
+等等，每一个处理css的Loader都要加上sourcemap: true
+当style-loader设置了singleton时 sourcemap会没用，冲突。坑！
+
+js的sourcemap 如果用到了压缩js的插件，要在option里面提前把sourcemap选项打开
+```
+
+```
+  devtool: 'eval' // 速度最快
+```
+
+- EsLint
+
+  - 需要安装：
+    - eslint
+    - eslint-loader
+    - eslint-plugin-html
+    - eslint-friendly-formatter
+  - webpack中配置 + .eslintrc.*文件
+  - Javascript Standard Style (https://standardjs.com/)
+  - 老老实实用脚手架。。。感到绝望
+  
