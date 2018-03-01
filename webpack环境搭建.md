@@ -196,3 +196,10 @@ js的sourcemap 如果用到了压缩js的插件，要在option里面提前把sou
     - Devtool 去除sourcemap
     - cache-loader 缓存loader处理结果
     - 升级node,webpack 
+
+  ### 多页面应用
+
+    - 多页面单配置 在一个config.js里，每多一个页面就加一个entry,和一个new Html的那个插件
+    - 多页面多配置 一个baseconfig，一个conifg， config导出一个数组，里面每个成员都是一个配置文件
+      - 要借助parallel-webpack并行打包
+      

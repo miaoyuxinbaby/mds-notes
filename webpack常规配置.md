@@ -491,7 +491,7 @@ plugins: [
 
 把webpack公共代码打入HTML中<br>
 
-提前载入webpack加载代码 <br>
+提前载入webpack加载代码(webpack runtime) <br>
     inline-manifest-webpack-plugin <br>
     html-webpack-inline-chunk-plugin <br>
 
