@@ -168,3 +168,31 @@ js的sourcemap 如果用到了压缩js的插件，要在option里面提前把sou
   - Javascript Standard Style (https://standardjs.com/)
   - 老老实实用脚手架。。。感到绝望
   
+  ### 开发环境和生产环境
+
+    - webpack-merge  把配置组合在一起
+      - webpack.dev.conf.js
+      - webpack.prod.conf.js
+      - webpack.base.conf.js
+
+  ### 优化打包速度
+
+  - 办法一
+    - 分开vender和app 让webpack不处理第三方依赖
+      - Dllplugin
+      - DllReferencePlugin
+  - 办法二
+    - UglifyJsPlugin
+      - parallel 这个参数是平行打包，使用系统线程数量-1的线程打包，false为串行打包
+      - cache
+  - 办法三
+    - HappyPack 给loader用的，让Loader处理由串行变并行
+  - 办法四
+    - babel-loader
+      - options.cacheDirectory
+      - include exclude
+  - 其他
+    - 减少resolve
+    - Devtool 去除sourcemap
+    - cache-loader 缓存loader处理结果
+    - 升级node,webpack 
