@@ -1,0 +1,1 @@
+ctrl + shift + k  删除当前行
