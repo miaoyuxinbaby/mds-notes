@@ -65,3 +65,23 @@ npm list -g --depth=0 查看全局安装的包
     "prettier.singleQuote": true
   }
 ```
+
+- eslint配置
+
+```
+{
+  "env": {
+    "browser": true
+  },
+  "extends": "standard",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "plugins": [
+    "html"
+  ],
+  "rules": {
+    "generator-star-spacing": 0
+  }
+}
+```
