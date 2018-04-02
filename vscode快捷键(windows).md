@@ -28,7 +28,7 @@ npm list -g --depth=0 查看全局安装的包
       "sideBar.background": "#282c34"
     },
     "eslint.options": {
-      "configFile": "/Users/yoshino/.eslintrc.json"
+      "configFile": "/Users/yoshino/.eslintrc.js"
     },
     "eslint.validate": [
       "javascript",
@@ -49,7 +49,8 @@ npm list -g --depth=0 查看全局安装的包
         "**/node_modules": true
     },
     "files.associations": {
-        "*.vue": "vue"
+        "*.vue": "vue",
+        // "*.vue": "html"
     },
     "files.exclude": {
         "**/.git": true,
@@ -62,7 +63,13 @@ npm list -g --depth=0 查看全局安装的包
         "**/node_modules": true
     },
     "prettier.semi": false,
-    "prettier.singleQuote": true
+    "prettier.singleQuote": true,
+    "standard.validate": [
+      "javascript",
+      "javascriptreact",
+      "vue"
+    ],
+    "gitlens.keymap": "alternate",
   }
 ```
 
