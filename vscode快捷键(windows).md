@@ -2,10 +2,15 @@
 ctrl + shift + k  删除当前行
 alt + 上/下 上移或下移选中的行
 ctrl + G 键入要导航到的行数
+- \r\n是代码段里的换行
+- tab键是代码段的光标位切换$1,$2之类
+- ctrl + \ 是快速分屏
 // 格式化 ，安装standard风格
 // 全局eslint配置standard, 关闭自动fix。
+
 >javaScript Standard Style: fix all auto-fixable Problems
 npm list -g --depth=0 查看全局安装的包
+
 ```
 
 - 我的vscode配置

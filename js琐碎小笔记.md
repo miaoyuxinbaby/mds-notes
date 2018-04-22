@@ -1,5 +1,6 @@
 - ~[number] === -[number] - 1 eg: ~8 === -9
-- && 优先级高于 ||   
+- && 优先级高于 ||  
+- 真正会导致上下行解析出问题的 token 有 5 个：括号，方括号，正则开头的斜杠，加号，减号 。这些需要在行首加上分号
 - null 是基本类型中唯一的一个“假值”，typeof null === 'object'，所以检测null的类型需要：(!a && typeof a === "object")
 - typeof function a(){ /* .. */ } === "function"; // true  function是object的一个子类型
   - 具体来说，函数是“可调用对象”，它有一个内部属性 [[Call]]，该属性使其可以被调用
