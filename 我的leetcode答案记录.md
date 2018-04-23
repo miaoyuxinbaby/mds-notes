@@ -30,3 +30,49 @@ removeDuplicates([1,1,1,1,1,1,2,2,3,4,4,4,4,4,4,4])
 // 完全没有必要删除重复的（审题不清），答案只要返回个数就行。
 // 提前考虑边界情况也许可以降低复杂度
 ```
+
+- 买卖股票的最佳时机 II
+
+url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/22/
+
+```
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+    var profits = 0
+    var max = 0
+    var len = prices.length
+    for (var i = 1; i < len; i++) {
+        profits = prices[i] - prices[i-1]
+        if (profits > 0) {
+            max += profits
+        }
+    }
+    return max
+};
+
+// 看了别人代码之后的总结：
+// 判断是否盈利的时候可以不计算，直接比较大小，思维漏洞了
+```
+- 旋转数组
+
+url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/23/
+```
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var rotate = function(nums, k) {
+  var len = nums.length
+  var tempArr = nums.splice(len-k)
+  tempArr.reverse().forEach((item) => {
+      nums.unshift(item)
+  })
+};
+
+// 看了别人代码之后的总结：
+// 总是记不得使用apply, 多用了个循环
+```
