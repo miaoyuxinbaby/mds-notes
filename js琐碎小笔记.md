@@ -143,6 +143,7 @@ if (!~a.indexOf( "ol" )) { // true
 - if (a) { foo(); } 等于 a && foo()
 - 常见的误区是“== 检查值是否相等， === 检查值和类型是否相等”。听起来蛮有道理，然而还不够准确。<br>
 很多 JavaScript 的书籍和博客也是这样来解释的，但是很遗憾他们都错了。正确的解释是：“== 允许在相等比较中进行强制类型转换，而 === 不允许。”
+- 都是比较内存地址，只是==允许强制类型转换，=== 不允许
 - 很多人不知道，语句都有一个结果值。在控制台中输入 var a = 42 会得到结果值 undefined，而非 42。
 - 语法不允许我们获得语句的结果值并将其赋值给另一个变量
 - 语句系列逗号运算符（statement-series comma operator）将多个独立的表达式语句串联成一个语句
@@ -214,4 +215,67 @@ if (!~a.indexOf( "ol" )) { // true
   // [object RegExp]
   // [object Error] || [object DOMException]
   // [object Function] || [object AsyncFunction] || [object GeneratorFunction] || [object Proxy]
+```
+
+- js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递?
+  - emmm,初一看吓我一跳，如何将值类型的变量以引用的方式传递，我承认慌了，可能是思维定式，导致我忘了所谓的包装类型，毕竟平时用不到
+  - 通过将基础类型包装 (boxing) 可以以引用的方式传递
+
+- 引用类型是在没有引用之后, 通过 v8 的 GC 自动回收, 值类型如果是处于闭包的情况下, 要等闭包没有引用才会被 GC 回收, 非闭包的情况下等待 v8 的新生代 (new space) 切换的时候回收.
+- gc以前是引用计数，现在是标记清除（据说标记清除又升级了）
+
+- Promise 中 .then 的第二参数与 .catch 有什么区别?
+  - then里的第二个参数，就近捕获的原则
+  - 全局异常，所有流程异常都捕获，所以如果粒度不是很细，那么处理起来很麻烦
+
+- 封装是同步的，then的执行是异步
+```
+let doSth = new Promise((resolve, reject) => {
+  console.log('hello');
+  resolve();
+});
+
+setTimeout(() => {
+  doSth.then(() => {
+    console.log('over');
+  })
+}, 10000);
+```
+```
+setTimeout(function() {
+  console.log(1)
+}, 0);
+new Promise(function executor(resolve) {
+  console.log(2);
+  for( var i=0 ; i<10000 ; i++ ) {
+    i == 9999 && resolve();
+  }
+  console.log(3);
+}).then(function() {
+  console.log(4);
+});
+console.log(5);
+23541
+定时器是宏队列 promise是微队列
+微队列可以插队（同一轮事件循环内），宏队列一般都排在最后
+```
+- 常见宏队列
+  - 定时器，延时器，网络请求，io操作，script，ui渲染，setImmediate
+- 常见微队列
+  - promise，process.nextTick，MutationObserver
+
+- node里的emit是同步的
+
+```url
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                    href                                     │
+├──────────┬┬───────────┬─────────────────┬───────────────────────────┬───────┤
+│ protocol ││   auth    │      host       │           path            │ hash  │
+│          ││           ├──────────┬──────┼──────────┬────────────────┤       │
+│          ││           │ hostname │ port │ pathname │     search     │       │
+│          ││           │          │      │          ├─┬──────────────┤       │
+│          ││           │          │      │          │ │    query     │       │
+"  http:   // user:pass @ host.com : 8080   /p/a/t/h  ?  query=string   #hash "
+│          ││           │          │      │          │ │              │       │
+└──────────┴┴───────────┴──────────┴──────┴──────────┴─┴──────────────┴───────┘
 ```
