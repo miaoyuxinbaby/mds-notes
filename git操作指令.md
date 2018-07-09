@@ -24,7 +24,7 @@ Git鼓励大量使用分支：
 
 删除分支：git branch -d <name>
 
-存档现场 git stash 
+存档现场 git stash (soucetree 贮藏)
 
 查看存档 git stash list 
 
@@ -39,7 +39,7 @@ $ ssh-keygen -t rsa -C "your_email@youremail.com"
 git config --local user.name "你的名字"
 git config --local user.email "你的邮箱"
 
-##　HTTP请求gitlab时需要输入帐号密码： 偷懒方案
+##　HTTP请求gitlab时需要输入帐号密码： 偷懒方案(建议使用ssh)
 
 在项目的 .git/config 里修改[remote "origin"]里的url <br>
 将原来的http://gitlab.*****.com修改为http://username:password@gitlab.*****.com

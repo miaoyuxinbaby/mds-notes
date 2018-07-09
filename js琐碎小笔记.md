@@ -168,3 +168,50 @@ if (!~a.indexOf( "ol" )) { // true
 	gete(2)
   // 先提升fn,在提升变量，然后fn覆盖形参a，变量a被忽略。但是当赋值后，变量a覆盖fn
 ```
+
+- 可执行代码分三种
+
+```
+  1. 全局代码 页面加载的时候会执行
+  2. eval代码 eval('eval code')
+  3. 函数代码 
+  function () {
+    function code    
+  }
+  new Function(arg1, ... argn,  function code)
+```
+
+- js类型判断 toString(value)
+
+```
+  // arguments := [object Arguments]
+  function a () {
+    console.log(toString.call(arguments))
+  }
+  a()
+  // isObjectLike
+  function isObjectLike(value) {
+    return typeof value == 'object' && value !== null
+  }
+  // isArrayLike
+  function isArrayLike(value) {
+    return value != null && typeof value != 'function' && value.length > -1
+  }
+  // dom元素 nodeType === 1 && isObjectLike
+  // [object DataView]
+  // [object Map]
+  // [object Set]
+  // [object WeakMap]
+  // [object Object]
+  // [object Promise]
+  // [object Undefined]
+  // [object Null]
+  // [object Boolean]
+  // [object Number]
+  // [object String]
+  // [object Symbol]
+  // [object Date]
+  // [object RegExp]
+  // [object Error] || [object DOMException]
+  // [object Function] || [object AsyncFunction] || [object GeneratorFunction] || [object Proxy]
+```
