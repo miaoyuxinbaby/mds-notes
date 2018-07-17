@@ -5,7 +5,8 @@
 - git status 查看仓库当前的状态，告诉你是否被修改
 - git diff 查看difference，具体修改了什么内容
 - git log 命令显示从最近到最远的提交日志
-- HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
+  - HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
+  - 上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。
 - 穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
 - 要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
 - git push 把本地库的内容推送到远程
@@ -29,6 +30,26 @@ Git鼓励大量使用分支：
 查看存档 git stash list 
 
 读取存档 git stash apply + git stash drop 或 git stash pop
+
+把文件在工作区的修改全部撤销 git checkout -- 文件名
+
+查看对应的远程仓库版本（fetch和push地址） git remote -v
+
+打一个新标签 git tag <name>
+
+可以指定标签信息 git tag -a <tagname> -m "blablabla..."
+
+查看标签 git tag
+
+查看标签信息 git show <tagname>
+
+删除一个本地标签 git tag -d <tagname>
+
+可以推送一个本地标签 git push origin <tagname>
+
+推送全部未推送过的本地标签 git push origin --tags
+
+删除一个远程标签 git push origin :refs/tags/<tagname>
 
 git config -l 查看config配置
 
