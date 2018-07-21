@@ -256,9 +256,12 @@ new Promise(function executor(resolve) {
 });
 console.log(5);
 23541
-定时器是宏队列 promise是微队列
-微队列可以插队（同一轮事件循环内），宏队列一般都排在最后
-一般当调用栈空闲之后，会从macroTask中拿出一个，从microtask中取出所有，微队列中拿出的任务优先执行
+定时器是宏队列 promise的then是微队列
+
+当调用栈空闲后每次事件循环会先从(macro)task 中读取一个任务并执行，执行完毕后会将 microtask 队列中的所有任务依次执行，等到microtask 队列清空后再开始下一次事件循环
+
+事件循环 (macro)task 执行一个， microtask 执行所有， (macro)task 执行一个 microtask执行所有
+https://github.com/HcySunYang/vue-design/issues/130(有待修改)
 ```
 - 常见宏队列
   - 定时器，延时器，网络请求，io操作，script，ui渲染，setImmediate（只有ie支持），MessageChannel
@@ -282,7 +285,7 @@ console.log(5);
 ```
 
 - 在vue中，因为queueWatcher的存在，所以要优先选择微队列去更新状态，可以减少dom的重绘
-- 遍历数组和对象的时候，可以考虑用while来
+- 遍历数组和对象的时候，可以考虑用while来（从后向前遍历）
 ```
 if (isA) {
   i = val.length
