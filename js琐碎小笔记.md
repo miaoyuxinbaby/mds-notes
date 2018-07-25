@@ -260,6 +260,8 @@ console.log(5);
 
 当调用栈空闲后每次事件循环会先从(macro)task 中读取一个任务并执行，执行完毕后会将 microtask 队列中的所有任务依次执行，等到microtask 队列清空后再开始下一次事件循环
 
+**也有一种说法是，microtask优先于(macro)task执行**
+
 事件循环 (macro)task 执行一个， microtask 执行所有， (macro)task 执行一个 microtask执行所有
 https://github.com/HcySunYang/vue-design/issues/130(有待修改)
 ```
@@ -298,3 +300,12 @@ if (isA) {
 ```
 
 - window.open('../balabala') 可以写相对路径
+- 比如从接口里拿到后端的数据后，是一个对象，但是，我们又需要对这个对象添加一些需要用到的属性，这时候可以
+```js
+ let res = '后端返回的data'
+ let data = {
+   ...res,
+   attr1: 巴拉巴拉,
+   attr2: 巴拉巴拉
+ }
+```
