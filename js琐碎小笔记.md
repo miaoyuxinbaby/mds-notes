@@ -309,3 +309,23 @@ if (isA) {
    attr2: 巴拉巴拉
  }
 ```
+
+- 判断数组的两种方法
+
+```js
+  // instanceof 不行，如果不是同一个window下的array，会返回false
+  // 不考虑修改原型
+  var a = []
+  toString.call(a) // "[object Array]"
+  Array.isArray(a) // true
+```
+
+- 判断number的方法
+
+```js
+  typeof
+
+  toString
+
+  if(a !== a  || +a === a) console.log('是number')
+```
