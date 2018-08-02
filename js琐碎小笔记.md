@@ -329,3 +329,18 @@ if (isA) {
 
   if(a !== a  || +a === a) console.log('是number')
 ```
+
+- js词法作用域，作用域是变量（函数）声明时做决定的
+
+```js
+var z = 10;
+function foo () {
+  console.log(z)
+}
+function az () {
+  var z = 20;
+  
+  foo();
+}
+az() // 10
+```
