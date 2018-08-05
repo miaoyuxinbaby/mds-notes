@@ -1,10 +1,11 @@
 ### 数组
 
 - <a href="#1">从排序数组中删除重复项</a>
-- <a href="#2">从排序数组中删除重复项</a>
-- <a href="#3">从排序数组中删除重复项</a>
+- <a href="#2">买卖股票的最佳时机</a>
+- <a href="#3">旋转数组</a>
 - <a href="#4">存在重复元素</a>
 - <a href="#5">只出现一次的数字</a>
+- <a href="#6">两个数组的交集 II</a>
 
 <br>
 <br>
@@ -13,7 +14,7 @@
 <br>
 <br>
 <br>
-- <span id="1">从排序数组中删除重复项</span>
+> <span id="1">从排序数组中删除重复项</span>
 
   url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/21/
 
@@ -43,7 +44,7 @@ removeDuplicates([1,1,1,1,1,1,2,2,3,4,4,4,4,4,4,4])
 // 提前考虑边界情况也许可以降低复杂度
 ```
 
-- <span id="2">买卖股票的最佳时机 II</span>
+> <span id="2">买卖股票的最佳时机 II</span>
 
 url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/22/
 
@@ -69,7 +70,7 @@ var maxProfit = function(prices) {
 // 判断是否盈利的时候可以不计算，直接比较大小，思维漏洞了
 ```
 
-- <span id="3">旋转数组</span>
+> <span id="3">旋转数组</span>
 
 url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/23/
 
@@ -92,9 +93,9 @@ var rotate = function(nums, k) {
 ```
 
 
-- <span id="4">存在重复元素</span>
+> <span id="4">存在重复元素</span>
 
-url https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/24/
+url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/24/
 
 ```js
 
@@ -136,9 +137,9 @@ var containsDuplicate = function(nums) {
 };
 ```
 
-- <span id="5">存在重复元素</span>
+> <span id="5">只出现一次的数字</span>
 
-url https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/25/
+url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/25/
 
 ```js
 // me 
@@ -178,5 +179,68 @@ var singleNumber = function(nums) {
   let result = 0;
   nums.forEach(el => (result ^= el));
   return result;
+};
+```
+
+> <span id="6">两个数组的交集 II</span>
+
+url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/26/
+
+```js
+
+// 脑子抽了，第一次写的时候有个set完全是多余的操作，忘记删掉了。。。
+// 后来发现，删除后速度应该更快的代码，反而更慢了，然后再提交了一次，又快了，
+// 以上： leetcode代码执行速度不准确（受一些因素的影响）
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersect = function(nums1, nums2) {
+  let len1 = nums1.length
+  let len2 = nums2.length
+  let ret = []
+
+  if (len1 >= len2) {
+    for (let i = 0; i < len2; i++) {
+      let indexInNums1 = nums1.indexOf(nums2[i])
+      if (~indexInNums1) {
+        ret.push(nums2[i])
+        nums1[indexInNums1] = ''
+      }
+    }
+  } else {
+    for (let i = 0; i < len1; i++) {
+      let indexInNums2 = nums2.indexOf(nums1[i])
+      if (~indexInNums2) {
+        ret.push(nums1[i])
+        nums2[indexInNums2] = ''
+      }
+    }
+  }
+
+  return ret
+};
+
+// 妙啊，key是出现的数字，val是次数，不管nums1、nums2哪个长，都只要循环一次。O(n)
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersect = function(nums1, nums2) {
+    const map={};
+    const res=[];
+    nums1.forEach(function (v) {
+        map[v]?map[v]++:map[v]=1;
+    });
+
+    nums2.forEach(function (v) {
+        if(map[v]){
+            res.push(v);
+            map[v]--;
+        }
+    });
+    return res;
 };
 ```

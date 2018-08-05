@@ -152,6 +152,8 @@ if (!~a.indexOf( "ol" )) { // true
 - 尾调用不需要创建一个新的栈帧，而是可以重用已有的的栈帧。速度更快，也更节省内存
 - Javascript采用的是忽略原则，，同名变量声明忽略，同名函数声明覆盖
 
+> js变量声明规则
+
 ```
 对于同名的变量声明，Javascript采用的是忽略原则，后声明的会被忽略，变量声明和赋值操作可以写在一起，但是只有声明会被提升，提升后变量的值默认为undefined，结果是在赋值操作执行前变量的值必为undefined
 
@@ -170,7 +172,7 @@ if (!~a.indexOf( "ol" )) { // true
   // 先提升fn,在提升变量，然后fn覆盖形参a，变量a被忽略。但是当赋值后，变量a覆盖fn
 ```
 
-- 可执行代码分三种
+> 可执行代码分三种
 
 ```
   1. 全局代码 页面加载的时候会执行
@@ -182,7 +184,7 @@ if (!~a.indexOf( "ol" )) { // true
   new Function(arg1, ... argn,  function code)
 ```
 
-- js类型判断 toString(value)
+> js类型判断 toString(value)
 
 ```
   // arguments := [object Arguments]
@@ -217,18 +219,21 @@ if (!~a.indexOf( "ol" )) { // true
   // [object Function] || [object AsyncFunction] || [object GeneratorFunction] || [object Proxy]
 ```
 
-- js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递?
-  - emmm,初一看吓我一跳，如何将值类型的变量以引用的方式传递，我承认慌了，可能是思维定式，导致我忘了所谓的包装类型，毕竟平时用不到
-  - 通过将基础类型包装 (boxing) 可以以引用的方式传递
+> js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递?
+
+- emmm,初一看吓我一跳，如何将值类型的变量以引用的方式传递，我承认慌了，可能是思维定式，导致我忘了所谓的包装类型，毕竟平时用不到
+- 通过将基础类型包装 (boxing) 可以以引用的方式传递
 
 - 引用类型是在没有引用之后, 通过 v8 的 GC 自动回收, 值类型如果是处于闭包的情况下, 要等闭包没有引用才会被 GC 回收, 非闭包的情况下等待 v8 的新生代 (new space) 切换的时候回收.
+
+
 - gc以前是引用计数，现在是标记清除（据说标记清除又升级了）
 
-- Promise 中 .then 的第二参数与 .catch 有什么区别?
+> Promise 中 .then 的第二参数与 .catch 有什么区别?
   - then里的第二个参数，就近捕获的原则
   - 全局异常，所有流程异常都捕获，所以如果粒度不是很细，那么处理起来很麻烦
+  - 封装是同步的，then的执行是异步
 
-- 封装是同步的，then的执行是异步
 ```
 let doSth = new Promise((resolve, reject) => {
   console.log('hello');
@@ -272,7 +277,9 @@ https://github.com/HcySunYang/vue-design/issues/130(有待修改)
 
 - node里的emit是同步的
 
-```url
+> url结构
+
+```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                                    href                                     │
 ├──────────┬┬───────────┬─────────────────┬───────────────────────────┬───────┤
@@ -310,7 +317,7 @@ if (isA) {
  }
 ```
 
-- 判断数组的两种方法
+> 判断数组的两种方法
 
 ```js
   // instanceof 不行，如果不是同一个window下的array，会返回false
@@ -320,7 +327,7 @@ if (isA) {
   Array.isArray(a) // true
 ```
 
-- 判断number的方法
+> 判断number的方法
 
 ```js
   typeof
@@ -330,7 +337,7 @@ if (isA) {
   if(a !== a  || +a === a) console.log('是number')
 ```
 
-- js词法作用域，作用域是变量（函数）声明时做决定的
+> js词法作用域，作用域是变量（函数）声明时做决定的
 
 ```js
 var z = 10;
@@ -344,3 +351,14 @@ function az () {
 }
 az() // 10
 ```
+
+> amd cmd umd
+
+- amd 异步模块定义
+  - AMD是RequireJS在推广过程中对模块定义的规范化产出，AMD是异步加载模块，推崇依赖前置。
+- CMD 公共模块定义
+  - 提到CMD，就不得不提起CommonJS，CommonJS是服务端模块的规范，由于Node.js被广泛认知。
+  - 根据CommonJS规范，一个单独的文件就是一个模块。加载模块使用require方法，该方法读取一个文件并执行，最后返回文件内部的module.exports对象。
+- UMD 通用模块定义
+  - UMD是AMD和CommonJS的一个糅合。AMD是浏览器优先，异步加载；CommonJS是服务器优先，同步加载。
+既然要通用，怎么办呢？那就先判断是否支持node.js的模块，存在就使用node.js；再判断是否支持AMD（define是否存在），存在则使用AMD的方式加载。这就是所谓的UMD。
