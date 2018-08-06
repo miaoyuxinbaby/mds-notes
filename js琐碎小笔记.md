@@ -362,3 +362,6 @@ az() // 10
 - UMD 通用模块定义
   - UMD是AMD和CommonJS的一个糅合。AMD是浏览器优先，异步加载；CommonJS是服务器优先，同步加载。
 既然要通用，怎么办呢？那就先判断是否支持node.js的模块，存在就使用node.js；再判断是否支持AMD（define是否存在），存在则使用AMD的方式加载。这就是所谓的UMD。
+
+> can we use __proto__?
+export const hasProto = '__proto__' in {}
