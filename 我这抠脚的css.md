@@ -26,7 +26,8 @@ span::after{
   <div class="fix"></div>
 </div>
 ```
-```
+
+```css
 .parent {
   margin: 50px;
   border: 2px solid red;
