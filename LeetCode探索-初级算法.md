@@ -7,14 +7,11 @@
 > [只出现一次的数字](#5)
 > [两个数组的交集 II](#6)
 > [加一](#7)
+> [移动零](#8)
+> [两数之和](#9)
+> [有效的数独](#10)
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 
 > <span id="1">从排序数组中删除重复项</span>
 > test
@@ -255,6 +252,7 @@ url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy
 ```js
 // 解答错误
 // 超出了最大精度好像。。。。
+// js最大整数 9007199254740991 共16位
 // parseInt("6145390195186705543899")
 // 6145390195186705000
 /**
@@ -320,5 +318,214 @@ var plusOne = function(digits) {
   }
 
   return digits
+};
+```
+
+ >> 别人的答案
+
+```js
+// 相比于用for循环，我用while，多维护了一个i的状态， for循环中，第二和三个参数，直接解决了这个状态
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+  var len = digits.length;
+  for (var i = len - 1; i >= 0; i--) {
+    if (digits[i] < 9) {
+      digits[i]++;
+      return digits; 
+    }
+    digits[i] = 0;
+  }
+  return [1, ...digits];
+};
+```
+
+> <span id="8">移动零</span>
+
+url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/28/
+
+>> 我的答案
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function(nums) {
+  let len = nums.length
+  for (let i = 0; i < len; i++) {
+    if (nums[i] === 0) {
+      let j = i
+      while (true) {
+        j++        
+        if (j >= len) return
+        if (nums[j] !== 0) {
+          nums[i] = nums[j]
+          nums.splice(j, 1)
+          nums.push(0)
+          break
+        }
+      }
+    }
+  }
+  return
+};
+```
+
+>> 别人的答案
+
+```js
+// mmp, 又把问题复杂化了，本来一开始也想着从后面往前循环的。
+// 从前往后循环，必须要保证当前索引不会消失，下面的方法没有这个担心
+// 从后往前循环，可以删除当前项
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function(nums) {
+  for (var i = nums.length - 1; i >= 0; i--) {
+    if (nums[i] === 0){
+      nums.splice(i,1);
+      nums.push(0);
+    }
+  }
+};
+
+// 递归
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function(nums) {
+    let n = -1;
+    const move = (i) => {
+        n++;
+        if (n < nums.length) {
+            if (nums[i] === 0) {
+                nums.push(0);
+                nums.splice(i, 1);
+                move(i);
+            } else {
+                move(i + 1);
+            }
+        }
+    }
+    move(0);
+};
+```
+
+> <span id="9">两数之和</span>
+
+url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/29/
+
+>> 我的答案
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+  let len = nums.length
+  for (let i = 0; i < len; i++) {
+    // 第一次提交，我赌了一次，他说的整数不包含负整数。。。。太嫩了。
+    // if (nums[i] > target) continue
+    for (let j = i + 1; j < len; j++) {
+      if (nums[i] + nums[j] === target) return [i, j]
+    }
+  }
+};
+```
+
+>> 别人的答案
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+
+// js中的对象是基于哈希表结构的.哈希表的查找时间复杂度为O(1) 所以很多人喜欢用对象来做映射，减少遍历循环。比如常见的数组去重
+// 对象中的key在obj[key]时都被自动转成了字符串类型。
+
+// 下面那句话是别人提交记录里的，学到了。
+// 用对象的 hash来查找的效率会比数组便利高很多 所以这里就相当于利用了缓存的思想
+var twoSum = function(nums, target) {
+  var len = nums.length;
+  var numObj = {};
+  for (var i = 0; i < len; i++) {
+    var current = nums[i];
+    var match = target - current;
+    if (match in numObj) {
+      return [i, numObj[match]]
+    } else {
+      numObj[current] = i;
+    }
+  }
+};
+```
+
+> <span id="10">有效的数独</span>
+
+url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/21/
+
+>> 我的答案
+
+```js
+
+// 跑了三次才跑出来。。。每次都是粗心导致的错误。
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+var isValidSudoku = function(board) {
+  let len = 9
+
+  let index = 9
+  const mapY = []
+  const mapXY = []
+  
+  while (index--) {
+    mapY.push({}) 
+    mapXY.push({}) 
+  }
+  
+  for (let i = 0; i < len; i++) {
+    const mapX = {}
+    for (let j = 0; j < len; j++) {
+      if (board[i][j] === '.') continue
+
+      if (board[i][j] in mapX) return false
+      else mapX[board[i][j]] = true
+      
+      if (board[i][j] in mapY[j]) return false
+      else mapY[j][board[i][j]] = true
+
+      let subfix
+
+      if ((i + 1) / 3 <= 1) {
+        if ((j + 1) / 3 <= 1) subfix = 0
+        else if ((j + 1) / 3 <= 2) subfix = 1
+        else subfix = 2
+      } else if ((i + 1) / 3 <= 2) {
+        if ((j + 1) / 3 <= 1) subfix = 3
+        else if ((j + 1) / 3 <= 2) subfix = 4
+        else subfix = 5
+      } else if ((i + 1) / 3 <= 3) {
+        if ((j + 1) / 3 <= 1) subfix = 6
+        else if ((j + 1) / 3 <= 2) subfix = 7
+        else subfix = 8
+      }
+
+      if (board[i][j] in mapXY[subfix]) return false
+      else mapXY[subfix][board[i][j]] = true
+    }
+  }
+
+  return true
 };
 ```

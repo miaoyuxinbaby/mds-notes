@@ -83,6 +83,8 @@ numbersCloseEnoughToEqual( 0.0000001, 0.0000002 ); // false
 
 > 最小整数就是负的最大整数 `Number.MIN_SAFE_INTEGER`
 
+  >> -9007199254740991 共16位
+
 - 要检测一个值是否是整数，可以使用 ES6 中的 `Number.isInteger` 方法
 
 ```js
