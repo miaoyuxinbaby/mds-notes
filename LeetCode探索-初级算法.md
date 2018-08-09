@@ -1,11 +1,12 @@
 ### 数组
 
-- <a href="#1">从排序数组中删除重复项</a>
-- <a href="#2">买卖股票的最佳时机</a>
-- <a href="#3">旋转数组</a>
-- <a href="#4">存在重复元素</a>
-- <a href="#5">只出现一次的数字</a>
-- <a href="#6">两个数组的交集 II</a>
+> [从排序数组中删除重复项](#1)
+> [买卖股票的最佳时机](#2)
+> [旋转数组](#3)
+> [存在重复元素](#4)
+> [只出现一次的数字](#5)
+> [两个数组的交集 II](#6)
+> [加一](#7)
 
 <br>
 <br>
@@ -14,8 +15,9 @@
 <br>
 <br>
 <br>
+
 > <span id="1">从排序数组中删除重复项</span>
-
+> test
   url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/21/
 
 ```js
@@ -242,5 +244,81 @@ var intersect = function(nums1, nums2) {
         }
     });
     return res;
+};
+```
+
+> <span id="7">加一</span>
+
+url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/27/
+
+  >> 第一次的答案
+```js
+// 解答错误
+// 超出了最大精度好像。。。。
+// parseInt("6145390195186705543899")
+// 6145390195186705000
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+  var resNum = +(digits.join('')) + 1 + ''
+  return resNum.split('').map(_ => +_)
+};
+```
+
+  >> 第二次的答案
+
+
+```js
+// 超出内存  这代码对[9]毫无抵抗能力，死循环了
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+  const len = digits.length
+  let whileing = true
+  let i = len - 1
+  while (whileing) {
+    if (++digits[i] < 10) {
+      whileing = false
+      break
+    } else {
+      digits[i] = 0
+      i--
+    }
+  }
+
+  return digits
+};
+```
+
+  >> 最终答案
+
+```js
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+  const len = digits.length
+  let whileing = true
+  let i = len - 1
+  while (whileing) {
+    if (++digits[i] < 10) {
+      whileing = false
+      break
+    } else {
+      digits[i] = 0
+      i--
+      if (i < 0) {
+        digits.unshift(1)
+        break
+      }
+    }
+  }
+
+  return digits
 };
 ```
