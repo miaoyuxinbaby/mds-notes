@@ -1,11 +1,11 @@
 # 数组
 
 > [从排序数组中删除重复项](#从排序数组中删除重复项) <br>
-> [买卖股票的最佳时机 II](#买卖股票的最佳时机-II) <br>
+> [买卖股票的最佳时机2](#买卖股票的最佳时机2) <br>
 > [旋转数组](#旋转数组) <br>
 > [存在重复元素](#存在重复元素) <br>
 > [只出现一次的数字](#只出现一次的数字) <br>
-> [两个数组的交集 II](#两个数组的交集-II) <br>
+> [两个数组的交集2](#两个数组的交集2) <br>
 > [加一](#加一) <br>
 > [移动零](#移动零) <br>
 > [两数之和](#两数之和) <br>
@@ -15,6 +15,8 @@
 ## 从排序数组中删除重复项
 
 > url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/21/
+
+> [返回导航](#数组)
 
 ```js
 /**
@@ -42,9 +44,11 @@ removeDuplicates([1,1,1,1,1,1,2,2,3,4,4,4,4,4,4,4])
 // 提前考虑边界情况也许可以降低复杂度
 ```
 
-## 买卖股票的最佳时机 II
+## 买卖股票的最佳时机2
 
 > url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/22/
+
+> [返回导航](#数组)
 
 ```js
 /**
@@ -72,6 +76,8 @@ var maxProfit = function(prices) {
 
 > url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/23/
 
+> [返回导航](#数组)
+
 ```js
 /**
  * @param {number[]} nums
@@ -94,6 +100,8 @@ var rotate = function(nums, k) {
 ## 存在重复元素
 
 > url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/24/
+
+> [返回导航](#数组)
 
 ```js
 
@@ -136,6 +144,8 @@ var containsDuplicate = function(nums) {
 ```
 
 ## 只出现一次的数字
+
+> [返回导航](#数组)
 
 > url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/25/
 
@@ -180,9 +190,11 @@ var singleNumber = function(nums) {
 };
 ```
 
-## 两个数组的交集 II
+## 两个数组的交集2
 
 > url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/26/
+
+> [返回导航](#数组)
 
 ```js
 
@@ -246,6 +258,8 @@ var intersect = function(nums1, nums2) {
 ## 加一
 
 > url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/27/
+
+> [返回导航](#数组)
 
   >> 第一次的答案
 ```js
@@ -345,6 +359,8 @@ var plusOne = function(digits) {
 
 > url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/28/
 
+> [返回导航](#数组)
+
 >> 我的答案
 
 ```js
@@ -419,6 +435,8 @@ var moveZeroes = function(nums) {
 
 > url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/29/
 
+> [返回导航](#数组)
+
 >> 我的答案
 
 ```js
@@ -471,6 +489,8 @@ var twoSum = function(nums, target) {
 ## 有效的数独
 
 > url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/30/
+
+> [返回导航](#数组)
 
 >> 我的答案
 
