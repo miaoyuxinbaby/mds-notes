@@ -10,6 +10,7 @@
 > [移动零](#移动零) <br>
 > [两数之和](#两数之和) <br>
 > [有效的数独](#有效的数独) <br>
+> [旋转图像](#旋转图像) <br>
 
 
 ## 从排序数组中删除重复项
@@ -546,5 +547,57 @@ var isValidSudoku = function(board) {
   }
 
   return true
+};
+```
+
+## 旋转图像
+
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/31/
+
+> [返回导航](#数组)
+
+>> 我的答案
+
+```js
+
+// 把每一个元素都顺时针旋转换位，保证每个元素只旋转一次。 左上 => 右上 => 右下 => 左下 => 左上 交换值
+/**
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ */
+
+var rotate = function(matrix) {
+  let len = matrix.length 
+
+  for (let i = 0; i < len; i++) {
+    for (let j = i; j < len - 1 - i; j++) {
+      var tmp = matrix[i][j]
+      matrix[i][j] = matrix[len - 1 - j][i]
+      matrix[len - 1 - j][i] = matrix[len - 1 - i][len - 1 - j]
+      matrix[len - 1 - i][len - 1 - j] = matrix[j][len - 1 - i]
+      matrix[j][len - 1 - i] = tmp
+    }
+  }
+};
+```
+
+>> 别人的答案
+
+```js
+// 先上下轴对称一下， 然后，把右上到左下，45度的交换值（按一定规律）
+// 这找规律也是无敌了。
+/**
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ */
+var rotate = function (matrix) {
+    matrix.reverse()
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = i + 1; j < matrix[0].length; j++) {
+            let tmp = matrix[i][j]
+            matrix[i][j] = matrix[j][i]
+            matrix[j][i] = tmp
+        }
+    }
 };
 ```
