@@ -1,21 +1,20 @@
 ### 数组
 
-> [从排序数组中删除重复项](#1)
-> [买卖股票的最佳时机](#2)
-> [旋转数组](#3)
-> [存在重复元素](#4)
-> [只出现一次的数字](#5)
-> [两个数组的交集 II](#6)
-> [加一](#7)
-> [移动零](#8)
-> [两数之和](#9)
-> [有效的数独](#10)
+> [从排序数组中删除重复项](#1) <br>
+> [买卖股票的最佳时机](#2) <br>
+> [旋转数组](#3) <br>
+> [存在重复元素](#4) <br>
+> [只出现一次的数字](#5) <br>
+> [两个数组的交集 II](#6) <br>
+> [加一](#7) <br>
+> [移动零](#8) <br>
+> [两数之和](#9) <br>
+> [有效的数独](#10) <br>
 
 
-
-> <span id="1">从排序数组中删除重复项</span>
-> test
-  url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/21/
+> <span id="1">从排序数组中删除重复项</span> <br>
+>  <br>
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/21/
 
 ```js
 /**
@@ -43,9 +42,9 @@ removeDuplicates([1,1,1,1,1,1,2,2,3,4,4,4,4,4,4,4])
 // 提前考虑边界情况也许可以降低复杂度
 ```
 
-> <span id="2">买卖股票的最佳时机 II</span>
-
-url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/22/
+> <span id="2">买卖股票的最佳时机 II</span> <br>
+> <br>
+>url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/22/
 
 ```js
 /**
@@ -69,9 +68,9 @@ var maxProfit = function(prices) {
 // 判断是否盈利的时候可以不计算，直接比较大小，思维漏洞了
 ```
 
-> <span id="3">旋转数组</span>
-
-url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/23/
+> <span id="3">旋转数组</span> <br>
+> <br>
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/23/
 
 ```js
 /**
@@ -92,9 +91,9 @@ var rotate = function(nums, k) {
 ```
 
 
-> <span id="4">存在重复元素</span>
-
-url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/24/
+> <span id="4">存在重复元素</span> <br>
+> <br>
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/24/
 
 ```js
 
@@ -136,9 +135,9 @@ var containsDuplicate = function(nums) {
 };
 ```
 
-> <span id="5">只出现一次的数字</span>
-
-url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/25/
+> <span id="5">只出现一次的数字</span> <br>
+> <br>
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/25/
 
 ```js
 // me 
@@ -181,9 +180,9 @@ var singleNumber = function(nums) {
 };
 ```
 
-> <span id="6">两个数组的交集 II</span>
-
-url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/26/
+> <span id="6">两个数组的交集 II</span> <br>
+> <br>
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/26/
 
 ```js
 
@@ -244,9 +243,9 @@ var intersect = function(nums1, nums2) {
 };
 ```
 
-> <span id="7">加一</span>
-
-url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/27/
+> <span id="7">加一</span> <br>
+> <br>
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/27/
 
   >> 第一次的答案
 ```js
@@ -342,9 +341,9 @@ var plusOne = function(digits) {
 };
 ```
 
-> <span id="8">移动零</span>
-
-url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/28/
+> <span id="8">移动零</span> <br>
+> <br>
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/28/
 
 >> 我的答案
 
@@ -416,9 +415,9 @@ var moveZeroes = function(nums) {
 };
 ```
 
-> <span id="9">两数之和</span>
-
-url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/29/
+> <span id="9">两数之和</span> <br>
+> <br>
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/29/
 
 >> 我的答案
 
@@ -469,9 +468,9 @@ var twoSum = function(nums, target) {
 };
 ```
 
-> <span id="10">有效的数独</span>
-
-url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/21/
+> <span id="10">有效的数独</span> <br>
+> <br>
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/30/
 
 >> 我的答案
 
