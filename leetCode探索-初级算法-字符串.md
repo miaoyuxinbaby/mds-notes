@@ -4,6 +4,8 @@
 > [颠倒整数](#颠倒整数) <br>
 > [字符串中的第一个唯一字符](#字符串中的第一个唯一字符) <br>
 > [有效的字母异位词](#有效的字母异位词) <br>
+> [验证回文串](#验证回文串) <br>
+> [字符串转整数(atoi)](#字符串转整数(atoi)) <br>
 
 
 ## 反转字符串
@@ -167,5 +169,121 @@ var isAnagram = function(s, t) {
       if(s.length === 0) return true
       i=-1
     }
+};
+```
+
+## 验证回文串
+
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/5/strings/36/
+
+> [返回导航](#字符串)
+
+
+>> 我的答案
+
+
+>>> 第一次
+
+```js
+var isPalindrome = function(s) {
+  var str = s.replace(/[^0-9a-zA-Z]/g, '').toLocaleLowerCase()
+  let len = str.length
+  for (let start = 0, end = len - 1; start < len; ++start, --end) {
+    if (start > end) return true
+    if (str[start] !== str[end]) return false
+  }
+
+  return true
+};
+```
+
+>>> 第二次
+
+```js
+// 两者区别不太大，都是双指针。但第二次的这个快一些（我也不知道为什么）
+// 双指针
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function(s) {
+  var str = s.replace(/[\W]/g, '').toLocaleLowerCase()
+
+  let start = 0, end = str.length - 1;
+  while (start < end) {
+    if (!str[start] || !str[end]) {
+        return false
+    }
+    if (str[start] != str[end]) {
+        return false
+    }
+    start++
+    end--
+  }
+
+  return true
+};
+```
+
+## 字符串转整数(atoi)
+
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/5/strings/37/
+
+> [返回导航](#字符串)
+
+
+>> 我的答案
+
+```js
+// 题目有点绕。死在边界条件好几次。这题目，没意思
+/**
+ * @param {string} str
+ * @return {number}
+ */
+var myAtoi = function(str) {
+  let n = 0
+  let newStr = str
+  while (/\s/.test(str.charAt(n))) {
+    newStr = newStr.replace(/\s/, '')
+    n++
+  }
+  
+  if (newStr.length === 0) return 0
+
+  if (!/^[-+]|[0-9]/.test(newStr.charAt(0))) return 0
+
+  if (/\D/.test(newStr.charAt(1)) || newStr.charAt(1) === '') {
+    if (/\./.test(newStr.charAt(1))) {
+      if (/\d/.test(newStr.charAt(0))) return +newStr.charAt(0)
+      else return 0
+    } else {      
+      if (newStr.charAt(0) === '+' || newStr.charAt(0) === '-') return 0
+      return +newStr.charAt(0)
+    }
+  }
+
+  let falg = ''
+
+  if (newStr.charAt(0) === '+' || newStr.charAt(0) === '-') falg = newStr.charAt(0)
+
+  let i = falg === '' ? 0 : 1
+  let res = falg
+  while (/[0-9]/.test(newStr.charAt(i))) {
+    res += newStr.charAt(i)
+    i++
+  }
+  
+  res = +res
+  if (falg === '' || falg === '+') {
+    let INT_MAX = Math.pow(2, 31) - 1
+    if (res > INT_MAX) return INT_MAX
+    else return res
+  }
+  
+  if (falg === '-') {
+    let INT_MIN = Math.pow(-2, 31)
+    if (res < INT_MIN) return INT_MIN
+    else return res
+  }
 };
 ```
