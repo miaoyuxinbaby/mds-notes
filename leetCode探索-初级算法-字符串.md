@@ -6,6 +6,9 @@
 > [有效的字母异位词](#有效的字母异位词) <br>
 > [验证回文串](#验证回文串) <br>
 > [字符串转整数_atoi](#字符串转整数_atoi) <br>
+> [实现strStr](#实现strStr) <br>
+> [最长公共前缀](#最长公共前缀) <br>
+> [数数并说](#数数并说) <br>
 
 
 ## 反转字符串
@@ -285,5 +288,90 @@ var myAtoi = function(str) {
     if (res < INT_MIN) return INT_MIN
     else return res
   }
+};
+```
+
+## 实现strStr
+
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/5/strings/38/
+
+> [返回导航](#字符串)
+
+
+>> 我的答案
+
+```js
+// 这是什么破题、、、
+/**
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+var strStr = function(haystack, needle) {
+  return haystack.indexOf(needle)  
+};
+```
+
+## 最长公共前缀
+
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/5/strings/40/
+
+> [返回导航](#字符串)
+
+
+>> 我的答案
+
+```js
+// 'abc'.charAt(3) === '', 所以要加上 i < len
+// 有几个写的好长，复杂很多，118个测试案例下比我快20ms。。  我觉得不值得
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+  if (strs.length === 0) return ''
+  let res = ''
+  let i = 0
+  let len = strs[0].length
+
+  while (i < len && strs.every(item => item.charAt(i) === strs[0].charAt(i))) {
+    res += strs[0].charAt(i)
+    i++
+  }
+  return res
+};
+```
+
+## 数数并说
+
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/5/strings/39/
+
+> [返回导航](#字符串)
+
+
+>> 我的答案
+
+```js
+// 这题目我不想做，直接网上找了个答案。
+/**
+ * @param {number} n
+ * @return {string}
+ */
+var countAndSay = function(n) {
+    if (n <= 0) return "";
+    let res = "1";
+    while (--n) {
+        let cur = "";
+        for (let i = 0; i < res.length; ++i) {
+            let cnt = 1;
+            while (i + 1 < res.length && res[i] == res[i + 1]) {
+                ++cnt;
+                ++i;
+            }
+            cur += cnt.toString() + res[i];
+        }
+        res = cur;
+    }
+    return res;
 };
 ```
