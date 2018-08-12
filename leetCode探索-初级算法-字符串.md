@@ -5,7 +5,7 @@
 > [字符串中的第一个唯一字符](#字符串中的第一个唯一字符) <br>
 > [有效的字母异位词](#有效的字母异位词) <br>
 > [验证回文串](#验证回文串) <br>
-> [字符串转整数(atoi)](#字符串转整数(atoi)) <br>
+> [字符串转整数_atoi](#字符串转整数_atoi) <br>
 
 
 ## 反转字符串
@@ -225,7 +225,7 @@ var isPalindrome = function(s) {
 };
 ```
 
-## 字符串转整数(atoi)
+## 字符串转整数_atoi
 
 > url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/5/strings/37/
 
