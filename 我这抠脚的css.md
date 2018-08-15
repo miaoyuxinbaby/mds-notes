@@ -44,3 +44,13 @@ span::after{
   top: 10px;
 }
 ```
+
+```html
+选择器	描述
+selector[attr]	选择selector所匹配的元素，且该元素拥有attr属性。可以省略selector，表示匹配所有拥有attr属性的元素
+selector[attr=val]	选择selector所匹配的元素，且该元素拥有值为val的attr属性。可以省略selector，表示匹配所有拥有值为val的attr属性的元素
+selector[attr~=val]	选择selector所匹配的元素，且该元素attr属性值具有多个空格分隔的值，其中一个值等于val。可以省略selector
+selector[attr*=val]	选择selector所匹配的元素，且该元素attr属性值的任意位置包含val。可以省略selector
+selector[attr^=val]	选择selector所匹配的元素，且该元素attr属性值以val开头。可以省略selector
+selector[attr$=val]	选择selector所匹配的元素，且该元素attr属性值以val结尾。可以省略selector
+```

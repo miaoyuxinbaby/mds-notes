@@ -97,3 +97,88 @@ npm list -g --depth=0 查看全局安装的包
   }
 }
 ```
+
+
+代码段
+```
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"php Print to console": {
+		"scope": "php",
+		"prefix": "dd",
+		"body": [
+			"echo '<pre>';\r\nprint_r($$1);\r\necho '</pre>';",
+			"$2"
+		],
+		"description": "php断点"
+	},
+	"js Print to console": {
+		"scope": "javascript, typescript, html, vue",
+		"prefix": "dd",
+		"body": [
+			"console.log('--------$1--------')",
+			"console.log($2)",
+			"$3"
+		],
+		"description": "js断点"
+	},
+	"row tag": {
+		"scope": "javascript, typescript, html, vue, template",
+		"prefix": "row",
+		"body": [
+			"<Row>",
+			"$1",
+			"</Row>"
+		],
+		"description": "row标签"
+	},
+	"coltag": {
+		"scope": "javascript, typescript, html, vue, template",
+		"prefix": "col",
+		"body": [
+			"<i-col>",
+			"$1",
+			"</i-col>"
+		],
+		"description": "col标签"
+	},
+	".vue init": {
+		"scope": "javascript, typescript, html, vue, template",
+		"prefix": "initv",
+		"body": [
+			"<template>",
+			"  $1",
+			"</template>",
+			" ",
+			"<script>",
+			"export default {",
+			"  data () {",
+			"    return {",
+			"      a: 1",
+			"    }",
+			"  },",
+			"  methods: {",
+			"  ",
+			"  }",
+			"}",
+			"</script>"
+		],
+		"description": ".vue init"
+	}
+}
+```

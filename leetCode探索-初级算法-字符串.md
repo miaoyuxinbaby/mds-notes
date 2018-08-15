@@ -30,7 +30,7 @@ var reverseString = function(s) {
 };
 ```
 
->> 比人的答案
+>> 别人的答案
 
 ```js
 // s.charAt(i) 获取s中索引为i的字符 （字符串可以通过下标获取字符）

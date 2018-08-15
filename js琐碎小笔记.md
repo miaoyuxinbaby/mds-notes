@@ -390,3 +390,7 @@ az() // 10
 
 > can we use __proto__?
 export const hasProto = '__proto__' in {}
+
+- string类型有trim方法，可以去除字符串两端的空白字符
+
+- promise 如果前一个 then 方法的返回值是一个 Promise 实例，那么后一个 then 方法的回调函数会等待该 Promise 实例的状态改变后再执行
