@@ -1,3 +1,5 @@
+# 杂记
+
 ~[number] === -[number] - 1 eg: ~8 === -9
 
 && 优先级高于 ||  
@@ -50,7 +52,7 @@ var a = 'abc'
 a[1] // b
 ```
 
->  . 运算符需要给予特别注意，因为它是一个有效的数字字符，**会被优先识别为数字常量的一部分**，然后才是对象属性访问运算符
+> . 运算符需要给予特别注意，因为它是一个有效的数字字符，**会被优先识别为数字常量的一部分**，然后才是对象属性访问运算符
 
 ```js
 // 无效语法：
@@ -76,13 +78,9 @@ numbersCloseEnoughToEqual( 0.0000001, 0.0000002 ); // false
 ```
 
 > 能够呈现的最大浮点数大约是 1.798e+308（这是一个相当大的数字），它定义在 `Number.MAX_VALUE` 中。
-
 > 最小浮点数定义在 `Number.MIN_VALUE` 中，大约是 5e-324，它不是负数，但无限接近于 0 ！
-
 > 能够被“安全”呈现的最大整数是 2^53 - 1，即 9007199254740991  `Number.MAX_SAFE_INTEGER`
-
 > 最小整数就是负的最大整数 `Number.MIN_SAFE_INTEGER`
-
   >> -9007199254740991 共16位
 
 - 要检测一个值是否是整数，可以使用 ES6 中的 `Number.isInteger` 方法
@@ -169,9 +167,7 @@ if (!~a.indexOf( "ol" )) { // true
 - , 运算符的优先级比 = 低
 - 尾调用不需要创建一个新的栈帧，而是可以重用已有的的栈帧。速度更快，也更节省内存
 
-
 > Javascript采用的是忽略原则，，同名变量声明忽略，同名函数声明覆盖
-
 > js变量声明规则
 
 对于同名的变量声明，Javascript采用的是忽略原则，后声明的会被忽略，变量声明和赋值操作可以写在一起，但是只有声明会被提升，提升后变量的值默认为undefined，结果是在赋值操作执行前变量的值必为undefined
@@ -181,16 +177,15 @@ if (!~a.indexOf( "ol" )) { // true
 对于同名的函数声明和变量声明，采用的是忽略原则，由于在提升时函数声明会提升到变量声明之前，变量声明一定会被忽略，所以结果是函数声明有效
 
 ```js
-
-	function gete(a) {
-		console.log(a)
-		var a = 1;
-		function a() {
-			console.log(3)
-		}
-	}
-	gete(2)
-  // 先提升fn,在提升变量，然后fn覆盖形参a，变量a被忽略。但是当赋值后，变量a覆盖fn
+function gete(a) {
+  console.log(a)
+  var a = 1;
+  function a() {
+    console.log(3)
+  }
+}
+gete(2)
+// 先提升fn,在提升变量，然后fn覆盖形参a，变量a被忽略。但是当赋值后，变量a覆盖fn
 ```
 
 > 可执行代码分三种
@@ -286,12 +281,13 @@ console.log(5);
 23541
 定时器是宏队列 promise的then是微队列
 
-当调用栈空闲后每次事件循环会先从(macro)task 中读取一个任务并执行，执行完毕后会将 microtask 队列中的所有任务依次执行，等到microtask 队列清空后再开始下一次事件循环
-
-**也有一种说法是，microtask优先于(macro)task执行**
-
-事件循环 (macro)task 执行一个， microtask 执行所有， (macro)task 执行一个 microtask执行所有
 https://github.com/HcySunYang/vue-design/issues/130(有待修改)
+
+> 总结！
+> 事件循环肯定是从task开始的，但microtask优先级更高。microtask清空后要渲染视图
+> process.nextTick注册的函数优先级高于Promise。 类似于插队
+> 当调用栈空闲后每次事件循环会先从(macro)task 中读取一个任务并执行，执行完毕后会将 microtask 队列中的所有任务依次执行，等到microtask 队列清空后再开始下一次事件循环
+
 ```
 
 - 常见宏队列
@@ -333,6 +329,7 @@ if (isA) {
 
 - window.open('../balabala') 可以写相对路径
 - 比如从接口里拿到后端的数据后，是一个对象，但是，我们又需要对这个对象添加一些需要用到的属性，这时候可以
+
 ```js
  let res = '后端返回的data'
  let data = {
@@ -386,6 +383,7 @@ az() // 10
   - 根据CommonJS规范，一个单独的文件就是一个模块。加载模块使用require方法，该方法读取一个文件并执行，最后返回文件内部的module.exports对象。
 - UMD 通用模块定义
   - UMD是AMD和CommonJS的一个糅合。AMD是浏览器优先，异步加载；CommonJS是服务器优先，同步加载。
+
 既然要通用，怎么办呢？那就先判断是否支持node.js的模块，存在就使用node.js；再判断是否支持AMD（define是否存在），存在则使用AMD的方式加载。这就是所谓的UMD。
 
 > can we use __proto__?
