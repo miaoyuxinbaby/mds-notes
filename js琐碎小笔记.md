@@ -243,13 +243,12 @@ gete(2)
 
 - 引用类型是在没有引用之后, 通过 v8 的 GC 自动回收, 值类型如果是处于闭包的情况下, 要等闭包没有引用才会被 GC 回收, 非闭包的情况下等待 v8 的新生代 (new space) 切换的时候回收.
 
-
 - gc以前是引用计数，现在是标记清除（据说标记清除又升级了）
 
 > Promise 中 .then 的第二参数与 .catch 有什么区别?
-  - then里的第二个参数，就近捕获的原则
-  - 全局异常，所有流程异常都捕获，所以如果粒度不是很细，那么处理起来很麻烦
-  - 封装是同步的，then的执行是异步
+- then里的第二个参数，就近捕获的原则
+- 全局异常，所有流程异常都捕获，所以如果粒度不是很细，那么处理起来很麻烦
+- 封装是同步的，then的执行是异步
 
 ```js
 let doSth = new Promise((resolve, reject) => {
@@ -287,6 +286,10 @@ https://github.com/HcySunYang/vue-design/issues/130(有待修改)
 > 事件循环肯定是从task开始的，但microtask优先级更高。microtask清空后要渲染视图
 > process.nextTick注册的函数优先级高于Promise。 类似于插队
 > 当调用栈空闲后每次事件循环会先从(macro)task 中读取一个任务并执行，执行完毕后会将 microtask 队列中的所有任务依次执行，等到microtask 队列清空后再开始下一次事件循环
+
+> hcy大佬的意思是，microtask -> marcoTask。
+> 2个marcoTask中间穿插着视图渲染
+> 我也觉得hcy大佬说得对！
 
 ```
 
@@ -392,3 +395,42 @@ export const hasProto = '__proto__' in {}
 - string类型有trim方法，可以去除字符串两端的空白字符
 
 - promise 如果前一个 then 方法的返回值是一个 Promise 实例，那么后一个 then 方法的回调函数会等待该 Promise 实例的状态改变后再执行
+
+- call是一个一个值的传， apply是传数组
+
+Json的2个方法组合深拷贝缺点，，，函数无法被拷贝下来，同时也无法拷贝 copyObj 对象原型链上的属性和方法。循环引用也不能
+
+iview的input组件，明明暴露了input事件，但却没有写进文档里。
+
+File.__proto 是Blob。说明，file继承了blob.
+
+```js
+// 验证 File 继承 Blob
+var file = new File(["foo"], "foo.txt", {
+  type: "text/plain",
+});
+
+file instanceof Blob    // true
+```
+
+FileList对象是一个类数组对象，拥有 length 属性，对象的每个元素都是一个 File 对象实例
+
+## vue
+
+vm._watchers 中存放的是实例属性的观察者
+
+`newDepIds`、`newDeps` 以及 `depIds`、`deps`
+
+这四个属性是用来避免收集重复的依赖的。
+
+`newDepIds` 属性用来避免在 **一次求值** 的过程中收集重复的依赖，
+
+`depIds` 属性是用来在 **多次求值** 中避免收集重复依赖的。
+
+每一次求值之后 `newDepIds` 属性都会被清空，也就是说每次重新求值的时候对于观察者实例对象来讲 `newDepIds` 属性始终是全新的
+
+vm.notify()触发响应  声明在Dep类中
+
+Dep类的subs属性，存的是实例的观察者对象，notify()就是遍历subs的成员，并逐个调用观察者对象的 `update` 方法
+
+vue 同值不触发更新, 新旧值对比

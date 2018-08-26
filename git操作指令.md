@@ -1,6 +1,7 @@
 # git操作指令笔记
+
 - git init 初始化一个仓库
-- git add <file> 添加到暂存区,可反复多次使用，添加多个文件
+- git add `<file>` 添加到暂存区,可反复多次使用，添加多个文件
 - git commit -m 'some log'上传到本地仓库（当前分支）
 - git status 查看仓库当前的状态，告诉你是否被修改
 - git diff 查看difference，具体修改了什么内容
@@ -10,7 +11,8 @@
 - 穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
 - 要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
 - git push 把本地库的内容推送到远程
-```
+
+```html
 Git鼓励大量使用分支：
 
 查看分支：git branch
@@ -64,3 +66,9 @@ git config --local user.email "你的邮箱"
 
 在项目的 .git/config 里修改[remote "origin"]里的url <br>
 将原来的http://gitlab.*****.com修改为http://username:password@gitlab.*****.com
+
+## 关于 commit pull的顺序。
+
+当没有别人和你修改同一个文件时，先pull，再commit,这样不会出现多余的merge信息，
+
+如果有人和你一起改同一个文件，那就先commit，再Pull，防止自己代码被覆盖。
