@@ -280,18 +280,38 @@ console.log(5);
 23541
 定时器是宏队列 promise的then是微队列
 
+console.log(1);
+
+ setTimeout(() => {
+   console.log('setTimeout');
+ }, 0);
+
+ let promise = new Promise(resolve => {
+   console.log(3);
+   resolve();
+ }).then(data => {
+   console.log(100);
+ }).then(data => {
+   console.log(200);
+ });
+
+ console.log(2);
+
+ 1 3 2 100 200 'set'
+
 https://github.com/HcySunYang/vue-design/issues/130(有待修改)
 
 > 总结！
-> 事件循环肯定是从task开始的，但microtask优先级更高。microtask清空后要渲染视图
-> process.nextTick注册的函数优先级高于Promise。 类似于插队
-> 当调用栈空闲后每次事件循环会先从(macro)task 中读取一个任务并执行，执行完毕后会将 microtask 队列中的所有任务依次执行，等到microtask 队列清空后再开始下一次事件循环
-
-> hcy大佬的意思是，microtask -> marcoTask。
-> 2个marcoTask中间穿插着视图渲染
-> 我也觉得hcy大佬说得对！
-
+> 事件循环肯定是从task开始的，但microtask优先级更高。2个marcoTask中间穿插着视图渲染
+> 如果microtask请空前又加了microtask，那会直接在本次事件循环中执行，搭上末班车。
+> process.nextTick注册的函数优先级高于Promise。 类似于插队（优先队列）
+> 当执行栈中的任务清空，主线程会先检查微任务队列中是否有任务，如果有，就将微任务队列中的任务依次执行，直到微任务队列为空，之后再检查宏任务队列中是否有任务，如果有，则每次取出第一个宏任务加入到执行栈中，之后再清空执行栈，检查微任务，以此循环... ...
+> **同一次事件循环中，微任务永远在宏任务之前执行**。
 ```
+
+- 优先队列
+
+一般情况下，队列始终保持着先进先出的原则，但有些业务场景，并不一定要求先进来的要先出去，在出队的时候，要考虑队列中所有元素权重因子，优先级最高的元素最先出队，这种队列叫做优先队列。
 
 - 常见宏队列
   - 定时器，延时器，网络请求，io操作，script，ui渲染，setImmediate（只有ie支持），MessageChannel
@@ -415,6 +435,12 @@ file instanceof Blob    // true
 
 FileList对象是一个类数组对象，拥有 length 属性，对象的每个元素都是一个 File 对象实例
 
+按照 JSON 的规范，使用 JSON.stringify() 做对象序列化时，如果一个属性为函数或undefined，那这个属性就会被忽略。
+
+如果属性为 null 则可以正常序列化这个属性:
+
+遇到循环引用就GG
+
 ## vue
 
 vm._watchers 中存放的是实例属性的观察者
@@ -434,3 +460,7 @@ vm.notify()触发响应  声明在Dep类中
 Dep类的subs属性，存的是实例的观察者对象，notify()就是遍历subs的成员，并逐个调用观察者对象的 `update` 方法
 
 vue 同值不触发更新, 新旧值对比
+
+:numberArray="editingArray" @update:numberArray="val => editingArray = val"
+
+子组件里this.$emit('update:numberArray',this.system_number_array)
