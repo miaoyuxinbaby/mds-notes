@@ -1,6 +1,8 @@
 # 链表
 
 > [删除链表中的节点](#删除链表中的节点) <br>
+> [删除链表的倒数第N个节点](#删除链表的倒数第N个节点) <br>
+> [  反转链表](#  反转链表) <br>
 
 ## 删除链表中的节点
 
@@ -164,5 +166,84 @@ var removeNthFromEnd = function (head, n) {
     cur.next = delNode.next;
 
     return dummyHead.next;
+};
+```
+
+
+> [反转链表](#反转链表) <br>
+
+## 反转链表
+
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/6/linked-list/43/
+
+> [返回导航](#链表)
+
+>> 我的答案
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ * 取巧了，因为是单链表，我直接把值替换了。。。
+ */
+var reverseList = function(head) {
+  if (!head || !head.next) return head
+  let len = 0
+  let valList = []
+  let currentNode = head
+  while (currentNode.next) {
+    valList.push(currentNode.val)
+    currentNode = currentNode.next
+    len++
+  }
+
+  valList.push(currentNode.val)
+
+  currentNode = head
+  while (currentNode.next || len) {
+    currentNode.val = valList[len]
+    currentNode = currentNode.next
+    len--
+  }
+
+  currentNode.val = valList[len]
+
+  return head
+};
+
+```
+
+```js
+var reverseList = function(head) {
+  if (!head || !head.next) return head
+  new_head = reverseList(head.next)
+  // 把当前节点变成下一个节点的next
+  head.next.next = head
+  // 因为当前节点的next是链接原链表的，所以要断掉当前节点的next
+  head.next = null
+  return new_head
+};
+
+var reverseList = function(head) {
+  // 三指针换位
+  let prev = null;
+  let node = head;
+  let tempNext;
+  while (node) {
+    // 前面的节点变成当前节点的next，再把当前节点赋值给prev 最后把当前节点切换为下一个
+    // 要缓存下一个节点，不然就丢了
+    tempNext = node.next;
+    node.next = prev;
+    prev =  node;
+    node = tempNext;
+  }
+  return prev;
 };
 ```
