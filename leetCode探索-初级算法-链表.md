@@ -2,7 +2,9 @@
 
 > [删除链表中的节点](#删除链表中的节点) <br>
 > [删除链表的倒数第N个节点](#删除链表的倒数第N个节点) <br>
-> [  反转链表](#  反转链表) <br>
+> [反转链表](#反转链表) <br>
+> [合并两个有序链表](#合并两个有序链表) <br>
+> [回文链表](#回文链表) <br>
 
 ## 删除链表中的节点
 
@@ -246,4 +248,163 @@ var reverseList = function(head) {
   }
   return prev;
 };
+```
+
+> [合并两个有序链表](#合并两个有序链表) <br>
+
+## 合并两个有序链表
+
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/6/linked-list/44/
+
+> [返回导航](#链表)
+
+>> 我的答案
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(l1, l2) {
+  // 一个头指针
+  let head = new ListNode(0)
+  // 新链表的最后一个节点
+  let current = head
+  // l1,l2的指针（当前节点）
+  let cl1 = l1
+  let cl2 = l2
+
+  // 2者同时有后续节点
+  while (cl1 !== null && cl2 !== null) {    
+    if (cl1.val < cl2.val) {
+      current.next = new ListNode(cl1.val)
+      // 更新指针至最后一个节点
+      current = current.next
+      // 修改当前节点
+      cl1 = cl1.next
+    } else if (cl1.val === cl2.val) {
+      current.next = new ListNode(cl1.val)
+      current = current.next
+      cl1 = cl1.next
+
+      current.next = new ListNode(cl2.val)
+      current = current.next
+      cl2 = cl2.next
+    } else {
+      current.next = new ListNode(cl2.val)
+      current = current.next
+      cl2 = cl2.next
+    }
+  }
+
+  // 因为是有序的，当其中一个结束时，另一个肯定是可以直接拿过来接到尾部的
+  if (cl1 !== null) {
+    current.next = cl1
+  }
+
+  if (cl2 !== null) {
+    current.next = cl2
+  }
+
+  return head.next
+};
+```
+
+>> 别人的
+
+```js
+// 递归的思路
+var mergeTwoLists = function(l1, l2) {
+  if (l1 == null) return l2
+  if (l2 == null) return l1
+  let newH = null
+  if (l1.val < l2.val) {
+      newH = l1
+      newH.next = mergeTwoLists(l1.next, l2)
+  } else {
+      newH = l2
+      newH.next = mergeTwoLists(l1, l2.next)
+  }
+  return newH
+};
+```
+
+## 回文链表
+
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/6/linked-list/45/
+
+> [返回导航](#链表)
+
+>> 我的答案
+
+```js
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ * 第一次的答案，卒。看网上别人说的，取一般的链表，反转，前后同时进行可以避免
+ * Line 15: RangeError: Maximum call stack size exceeded
+ */
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var isPalindrome = function (head) {
+  // 先逆转一下，然后新的和旧的对比
+  let oldList = JSON.parse(JSON.stringify(head))
+  // 反转后的链表第一个节点
+  let prev = null
+  let node = head
+  let tempNext
+  while (node) {
+    tempNext = node.next
+    node.next = prev
+    prev = node
+    node = tempNext
+  }
+
+  // 原链表第一个节点
+  while (oldList) {
+    if (prev.val !== oldList.val) return false
+    oldList = oldList.next
+    prev = prev.next
+  }
+
+  return true
+}
+
+// 第二次，转成数组处理,性能好像不太好。。。。但也不算差
+var isPalindrome = function (head) {
+  // 先逆转一下，然后新的和旧的对比
+
+  let arr = []
+  let node = head
+  while (node) {
+    arr.unshift(node.val)
+    node = node.next
+  }
+
+  let i = 0
+  let node2 = head
+
+  // 原链表第一个节点
+  while (node2) {
+    if (arr[i] !== node2.val) return false
+    node2 = node2.next
+    i++
+  }
+
+  return true
+}
 ```
