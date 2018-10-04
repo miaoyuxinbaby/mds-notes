@@ -5,6 +5,7 @@
 > [反转链表](#反转链表) <br>
 > [合并两个有序链表](#合并两个有序链表) <br>
 > [回文链表](#回文链表) <br>
+> [环形链表](#环形链表) <br>
 
 ## 删除链表中的节点
 
@@ -407,4 +408,55 @@ var isPalindrome = function (head) {
 
   return true
 }
+```
+
+## 环形链表
+
+> url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/6/linked-list/46/
+
+> [返回导航](#链表)
+
+>> 我的答案
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * 双指针，快慢跑
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function(head) {
+    if (!head || !head.next) return false
+    let slow = head
+    let fast = head
+
+    while (fast.next && fast.next.next) {
+      slow = slow.next
+      fast = fast.next.next
+
+      if (slow === fast) return true
+    }
+
+    return false
+};
+
+// 方法2 哈希表
+var hasCycle = function(head) {
+    let hashTable = new Set()
+
+    while (head !== null) {
+      if (hashTable.has(head)) return true
+      else hashTable.add(head)
+
+      head = head.next
+    }
+    return false
+};
 ```
