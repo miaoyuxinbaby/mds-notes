@@ -453,6 +453,8 @@ CommonJS模块输出的是被输出值的拷贝，也就是说，一旦输出一
 
 处理“循环加载”的方法是不一样的，返回的结果也不一样。
 
+amd,cmd都是CommonJS的一种规范的实现定义，RequireJS和SeaJS是对应的实践
+
 ## vue
 
 vm._watchers 中存放的是实例属性的观察者
