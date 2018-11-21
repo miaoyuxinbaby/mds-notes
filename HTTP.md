@@ -143,6 +143,7 @@ DELETE /file.html HTTP/1.1
 
 - **503 Service Unavailable** ：服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。
 
+- **504 Gateway Time-out**: 网关超时
 
 当浏览器访问一个包含多张图片的 HTML 页面时，除了请求访问 HTML 页面资源，还会请求图片资源。如果每进行一次 HTTP 通信就要新建一个 TCP 连接，那么开销会很大。
 
