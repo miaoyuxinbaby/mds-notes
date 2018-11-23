@@ -115,3 +115,77 @@ fn2();
 ```
 
 14325 // await之后的代码都相当于在then中 相当于 fn1().then(x => logc(5))
+
+从输入URL到看到页面发生的全过程，越详细越好。
+
+DNS查询、IP寻址、等待资源响应、解析下载的内容、css解析和dom树的绘制，解析过程中遇到要下载的资源就异步下载并解析（css、js、图片之类）、dom树绘制完毕后开始计算每个节点的位置，进行绘制，css解析和dom树绘制是异步的，所以有时候会看见页面加载，视图有一些细微的变化。
+
+请简单实现双向数据绑定mvvm。
+
+计算元素的宽高，可以先插入body,获取之后再删掉
+
+前端压缩图片。
+context.drawImage(img, dx, dy, dWidth, dHeight);
+toBlob
+然后new File 上传
+
+getBoundingClientRect   left、right、top、bottom
+
+```js
+function father () {
+  this.arr = [1,2]
+}
+function son () {}
+
+// 原型链继承 缺点：父类中属性如果是引用类型，引用属性会被所有实例共享,
+son.prototype = new father()
+
+// test代码
+var a = new son()
+var b = new father()
+
+a.arr.push(3)
+console.log(a.arr)
+console.log(b.arr)
+// a和b的arr都变了
+
+```
+
+```js
+// 借用构造函数继承 相当于把父类的代码复制到子类里面执行一遍 这样做的另一个好处就是可以给父类传参
+function father () {
+  this.arr = [1,2]
+}
+function son () {
+  father.call(this)
+}
+
+// 借用构造函数解决了引用类型被所有实例共享的问题,但唯独函数没有被共享，而是copy了一份
+
+```
+
+继承方式	继承核心代码	优缺点
+原型链继承	Student.prototype = new Person()	实例的引用类型共享
+构造函数继承	在子类(Student)里执行 Person.call(this)	实例的引用类型不共享
+
+原型链继承 和 构造函数继承 这两种继承方式的优缺点刚好是互相矛盾的
+
+```js
+// 组合继承 组合继承,就是各取上面2种继承的长处,普通属性 使用 构造函数继承,函数 使用 原型链继承,
+// 既在子类中执行父类，又原型链继承父类
+// 缺点 父类构造函数里面的代码会声明2遍
+```
+
+```js
+// 原型式继承 有和原型链继承一样的毛病，区别是proto不一定要是构造函数，相当于浅拷贝了对象
+// ECMAScript 5 通过新增 Object.create()方法规范化了原型式继承。
+function clone (proto) {
+    function F () {}
+    F.prototype = proto
+    return new F()
+}
+```
+
+寄生组合式继承是引用类型最完美的继承 组合继承 和 寄生式 的结合
+
+ ES6继承的结果和寄生组合继承相似，本质上，ES6继承是一种语法糖。但是，寄生组合继承是先创建子类实例this对象，然后再对其增强；而ES6先将父类实例对象的属性和方法，加到this上面（所以必须先调用super方法），然后再用子类的构造函数修改this。
