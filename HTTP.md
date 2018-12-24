@@ -18,6 +18,11 @@ URI 包含 URL 和 URN，目前 WEB 只有 URL 比较流行，所以见到的基
 
 请求和响应报文 都是分为头和body，中间以一个空行分隔
 
+# 特点
+
+  1. 灵活 HTTP允许传输任意类型的数据对象
+  2. 无状态
+
 # 二、HTTP 方法
 
 客户端发送的  **请求报文**  第一行为请求行，包含了方法字段。
@@ -159,7 +164,7 @@ cookie会字段带在header里发给后端，设置httponly可以拒绝js对cook
 
 cookie是有作用域的  Domain 标识设置
 
-# 缓存
+## 缓存
 
 ### 1. 优点
 
@@ -218,3 +223,13 @@ HTTP 有以下安全性问题：
 HTTPs 并不是新协议，而是让 HTTP 先和 SSL（Secure Sockets Layer）通信，再由 SSL 和 TCP 通信，也就是说 HTTPs 使用了隧道进行通信。
 
 通过使用 SSL，HTTPs 具有了加密（防窃听）、认证（防伪装）和完整性保护（防篡改）。
+
+## get post 区别
+
+```
+GET在浏览器回退时是无害的，而POST会再次提交请求
+GET请求会被浏览器主动缓存，而POST不会，除非手动设置
+GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留
+GET请求在URL中传送的参数是有长度限制的，而POST没有限制
+GET参数通过URL传递，POST放在Request body中
+```
