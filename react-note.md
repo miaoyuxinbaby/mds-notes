@@ -129,15 +129,17 @@ pages 目录下可以放页面级组件，会自动映射成一个基于服务�
 关于获取数据，next.js 扩展了 React.Component 的 getInitialProps 方法。一般使用它来获取数据
 
 ```js
-import React from 'react'
-import 'isomorphic-fetch'
+import React from "react";
+import "isomorphic-fetch";
 export default class extends React.Component {
-  static async getInitialProps () {
-    const res = await fetch('url')
-    const data = await res.json()
-    return {username: data.profile.username}
+  static async getInitialProps() {
+    const res = await fetch("url");
+    const data = await res.json();
+    return { username: data.profile.username };
   }
 }
-
-
 ```
+
+## 代码复用
+
+从 mixin 到 hoc 再到如今的 render prop。是代码复用的进步。抛弃 mixin 的契机是 class 方式声明的组件不支持 mixin。 hoc 也很流行。但未来应该是 render prop 的。给组建传递一个函数，在子组件中执行，获得对应的组件
