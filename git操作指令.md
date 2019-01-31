@@ -1,5 +1,8 @@
 # git操作指令笔记
 
+
+## sourcetree在github密码修改后，要删除旧仓库重新拉代码，才能保证新ssh生效。恶心！
+
 - git init 初始化一个仓库
 - git add `<file>` 添加到暂存区,可反复多次使用，添加多个文件
 - git commit -m 'some log'上传到本地仓库（当前分支）
