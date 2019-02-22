@@ -95,3 +95,9 @@ position: fixed
 在 will-change 中指定了任意 CSS 属性，即便你没有直接指定这些属性的值
 -webkit-overflow-scrolling 属性被设置 "touch"的元素
 ```
+
+
+position: absolute:
+top/left/bottom/right: 0 撑开元素和父元素一样大。
+
+如果再加上 margin: auto，就可以居中元素
