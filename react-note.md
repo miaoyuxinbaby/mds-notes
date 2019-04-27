@@ -40,13 +40,9 @@ setState 也有一个异步更新队列，所以在 setState 之后读取 state,
 
 不要在 render 中 使用 setState。 因为 setState 会触发 render,循环引用
 
-在 vue 中跟 ui 无关的数据不放到 data 中，react 也是一样的。
-
 看起来事件是绑定在元素上，，其实是事件代理。
 
 react event 事件是经过封装的，解决了浏览器之间的差异，如果要访问原生的，可以 event.nativeEvent
-
-jsx 中传递列表索引给事件处理函数，可以 bind,也可以用箭头函数包一层
 
 关于组件通信
 
@@ -56,34 +52,6 @@ react,父子组件通信: 父传子,子的 render 中根据 props 自动变化�
 兄弟组件 状态提升
 任意组件 消息中间件 状态管理
 vue, 父传子 props(可 watch)，调子组件方法. 子传父$on $emit
-
-## redux
-
-redux 可以理解为一个严格规定了使用模式的库
-
-redux 借鉴了函数式编程的思想，采用了单向数据流理念，为实现对数据状态的管理封装提供了不同的方法，并规定了我们进行管理的模式。以此来达到数据可预测，可追溯。
-
-redux store getState subscribe dispatch reducer
-
-开发者预先定义 reducer 和 action 函数，在恰当的时候派发 action，即 dispatch(action),如果所编写的 reducer 函数没有问题，那么在正常更新状态后可以通过 store.subscribe 注册更新后的回调
-
-reducer 要是一个纯函数
-
-redux 设计哲学
-
-1. 数据来源单一 store 是唯一的 这区别于 flux
-2. state 是只读的，不能直接修改它
-3. 使用 reducer 函数来接收 action
-
-redux 提供了一套中间件机制，使开发者可以在派发任何一个 action 和执行 reducer 这两步之间，添加自定义扩展功能
-
-## react-redux
-
-明确 2 个重要概念： 容器组件和展示组件。
-
-容器组件是指数据状态和逻辑的容器。 展示组件只负责根据接收的数据展示页面。
-
-connect 的核心是将开发者定义的组件，封装转换成容器组件。
 
 - 网上的
 
@@ -129,13 +97,13 @@ pages 目录下可以放页面级组件，会自动映射成一个基于服务�
 关于获取数据，next.js 扩展了 React.Component 的 getInitialProps 方法。一般使用它来获取数据
 
 ```js
-import React from "react";
-import "isomorphic-fetch";
+import React from 'react'
+import 'isomorphic-fetch'
 export default class extends React.Component {
   static async getInitialProps() {
-    const res = await fetch("url");
-    const data = await res.json();
-    return { username: data.profile.username };
+    const res = await fetch('url')
+    const data = await res.json()
+    return { username: data.profile.username }
   }
 }
 ```
@@ -143,3 +111,5 @@ export default class extends React.Component {
 ## 代码复用
 
 从 mixin 到 hoc 再到如今的 render prop。是代码复用的进步。抛弃 mixin 的契机是 class 方式声明的组件不支持 mixin。 hoc 也很流行。但未来应该是 render prop 的。给组建传递一个函数，在子组件中执行，获得对应的组件
+
+如果列表项目的顺序可能会变化，我们不建议使用索引来用作键值，因为这样做会导致性能的负面影响，还可能引起组件状态问题。
