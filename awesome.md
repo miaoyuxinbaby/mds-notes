@@ -6,8 +6,7 @@
 - [image-conversion - 一些常规操作的集合，其中压缩图片到指定文件大小比较有意思](https://github.com/WangYuLue/image-conversion)
 - [classnames vue 中的那种数组对象式操作 class,可用到 react 中](https://github.com/JedWatson/classnames)
 - [cross-env 跨平台地设置及使用环境变量](https://github.com/kentcdodds/cross-env)
-- [smoothScroll 滚动到指定元素或者指定页面高度](https://github.com/alicelieutier/smoothScroll)
 
 ## 还没看
 
-- [viewcode 折叠显示内容，比如代码](https://github.com/lusaxweb/vuecode)
+- [smoothScroll 滚动到指定元素或者指定页面高度](https://github.com/alicelieutier/smoothScroll)

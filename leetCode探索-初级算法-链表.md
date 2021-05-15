@@ -1,11 +1,6 @@
 # 链表
 
-> [删除链表中的节点](#删除链表中的节点) <br>
-> [删除链表的倒数第N个节点](#删除链表的倒数第N个节点) <br>
-> [反转链表](#反转链表) <br>
-> [合并两个有序链表](#合并两个有序链表) <br>
-> [回文链表](#回文链表) <br>
-> [环形链表](#环形链表) <br>
+> [删除链表中的节点](#删除链表中的节点) <br> > [删除链表的倒数第 N 个节点](#删除链表的倒数第N个节点) <br> > [反转链表](#反转链表) <br> > [合并两个有序链表](#合并两个有序链表) <br> > [回文链表](#回文链表) <br> > [环形链表](#环形链表) <br>
 
 ## 删除链表中的节点
 
@@ -13,7 +8,7 @@
 
 > [返回导航](#链表)
 
->> 我的答案
+> > 我的答案
 
 ```js
 /**
@@ -29,28 +24,28 @@
  */
 // 非末尾，说明一定可以找到下一个节点  只给了当前要删除的节点，不知道前面一个节点
 var deleteNode = function(node) {
-    // 12345  12445
-    // 原来 3 next 是4，现在3next是5 所以，4和这个链表没关系了，会被gc回收
-    node.val = node.next.val
-    node.next = node.next.next
-};
+  // 12345  12445
+  // 原来 3 next 是4，现在3next是5 所以，4和这个链表没关系了，会被gc回收
+  node.val = node.next.val
+  node.next = node.next.next
+}
 ```
 
->> 别人的答案
+> > 别人的答案
 
 ```js
-  // 大家的代码一毛一样。。。
+// 大家的代码一毛一样。。。
 ```
 
-> [删除链表的倒数第N个节点](#删除链表的倒数第N个节点) <br>
+> [删除链表的倒数第 N 个节点](#删除链表的倒数第N个节点) <br>
 
-## 删除链表的倒数第N个节点
+## 删除链表的倒数第 N 个节点
 
 > url: https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/6/linked-list/42/
 
 > [返回导航](#链表)
 
->> 我的答案
+> > 我的答案
 
 ```js
 /**
@@ -97,81 +92,80 @@ var removeNthFromEnd = function(head, n) {
     node1 = node1.next
     node2 = node2.next
   }
-};
+}
 ```
 
->> 别人的答案
+> > 别人的答案
 
 ```js
 // 整体的逻辑比我的清晰，思路是一致的
-var removeNthFromEnd = function (head, n) {
-    if (!head) {
-        return null;
-    }
+var removeNthFromEnd = function(head, n) {
+  if (!head) {
+    return null
+  }
 
-    // 规范化链表，链表应该有一个头指针指向第一个节点。这个头指针没有value
-    var dummyHead = new ListNode(-1);
-    dummyHead.next = head;
+  // 规范化链表，链表应该有一个头指针指向第一个节点。这个头指针没有value
+  var dummyHead = new ListNode(-1)
+  dummyHead.next = head
 
-    // 跟我一样， 确定双指针的起点
-    var p1 = dummyHead;
-    for (var i = 0; i < n; i++) {
-        p1 = p1.next;
-    }
+  // 跟我一样， 确定双指针的起点
+  var p1 = dummyHead
+  for (var i = 0; i < n; i++) {
+    p1 = p1.next
+  }
 
-    // n超过总长度，直接返回
-    if (p1 == null) {
-        return head;
-    }
+  // n超过总长度，直接返回
+  if (p1 == null) {
+    return head
+  }
 
-    // p1、p2同步后移
-    var p2 = dummyHead;
-    while (p1.next != null) {
-        p1 = p1.next;
-        p2 = p2.next;
-    }
+  // p1、p2同步后移
+  var p2 = dummyHead
+  while (p1.next != null) {
+    p1 = p1.next
+    p2 = p2.next
+  }
 
-    var delNode = p2.next;
-    p2.next = delNode.next;
+  var delNode = p2.next
+  p2.next = delNode.next
 
-    return dummyHead.next;
-};
+  return dummyHead.next
+}
 
 // 这不是1遍遍历，而是两遍， 但也是一种思路
-var removeNthFromEnd = function (head, n) {
-    if (!head) {
-        return null;
-    }
+var removeNthFromEnd = function(head, n) {
+  if (!head) {
+    return null
+  }
 
-    var dummyHead = new ListNode(-1);
-    dummyHead.next = head;
+  var dummyHead = new ListNode(-1)
+  dummyHead.next = head
 
-    // 先遍历一遍链表，获取总长度
-    var listLength = 0;
-    var h = dummyHead.next;
+  // 先遍历一遍链表，获取总长度
+  var listLength = 0
+  var h = dummyHead.next
 
-    while (h != null) {
-        listLength++;
-        h = h.next;
-    }
+  while (h != null) {
+    listLength++
+    h = h.next
+  }
 
-    // n大于链表长度，直接返回
-    if (n > listLength) {
-        return head;
-    }
+  // n大于链表长度，直接返回
+  if (n > listLength) {
+    return head
+  }
 
-    // 删除倒数第n个节点，即删除正数第listLength - n个节点
-    var cur = dummyHead;
-    for (var i = 0; i < listLength - n; i++) {
-        cur = cur.next;
-    }
-    var delNode = cur.next;
-    cur.next = delNode.next;
+  // 删除倒数第n个节点，即删除正数第listLength - n个节点
+  var cur = dummyHead
+  for (var i = 0; i < listLength - n; i++) {
+    cur = cur.next
+  }
+  var delNode = cur.next
+  cur.next = delNode.next
 
-    return dummyHead.next;
-};
+  return dummyHead.next
+}
 ```
-
 
 > [反转链表](#反转链表) <br>
 
@@ -181,7 +175,7 @@ var removeNthFromEnd = function (head, n) {
 
 > [返回导航](#链表)
 
->> 我的答案
+> > 我的答案
 
 ```js
 /**
@@ -219,8 +213,7 @@ var reverseList = function(head) {
   currentNode.val = valList[len]
 
   return head
-};
-
+}
 ```
 
 ```js
@@ -232,23 +225,23 @@ var reverseList = function(head) {
   // 因为当前节点的next是链接原链表的，所以要断掉当前节点的next
   head.next = null
   return new_head
-};
+}
 
 var reverseList = function(head) {
   // 三指针换位
-  let prev = null;
-  let node = head;
-  let tempNext;
+  let prev = null
+  let node = head
+  let tempNext
   while (node) {
     // 前面的节点变成当前节点的next，再把当前节点赋值给prev 最后把当前节点切换为下一个
     // 要缓存下一个节点，不然就丢了
-    tempNext = node.next;
-    node.next = prev;
-    prev =  node;
-    node = tempNext;
+    tempNext = node.next
+    node.next = prev
+    prev = node
+    node = tempNext
   }
-  return prev;
-};
+  return prev
+}
 ```
 
 > [合并两个有序链表](#合并两个有序链表) <br>
@@ -259,7 +252,7 @@ var reverseList = function(head) {
 
 > [返回导航](#链表)
 
->> 我的答案
+> > 我的答案
 
 ```js
 /**
@@ -284,7 +277,7 @@ var mergeTwoLists = function(l1, l2) {
   let cl2 = l2
 
   // 2者同时有后续节点
-  while (cl1 !== null && cl2 !== null) {    
+  while (cl1 !== null && cl2 !== null) {
     if (cl1.val < cl2.val) {
       current.next = new ListNode(cl1.val)
       // 更新指针至最后一个节点
@@ -316,10 +309,10 @@ var mergeTwoLists = function(l1, l2) {
   }
 
   return head.next
-};
+}
 ```
 
->> 别人的
+> > 别人的
 
 ```js
 // 递归的思路
@@ -328,14 +321,14 @@ var mergeTwoLists = function(l1, l2) {
   if (l2 == null) return l1
   let newH = null
   if (l1.val < l2.val) {
-      newH = l1
-      newH.next = mergeTwoLists(l1.next, l2)
+    newH = l1
+    newH.next = mergeTwoLists(l1.next, l2)
   } else {
-      newH = l2
-      newH.next = mergeTwoLists(l1, l2.next)
+    newH = l2
+    newH.next = mergeTwoLists(l1, l2.next)
   }
   return newH
-};
+}
 ```
 
 ## 回文链表
@@ -344,10 +337,9 @@ var mergeTwoLists = function(l1, l2) {
 
 > [返回导航](#链表)
 
->> 我的答案
+> > 我的答案
 
 ```js
-
 /**
  * Definition for singly-linked list.
  * function ListNode(val) {
@@ -361,7 +353,7 @@ var mergeTwoLists = function(l1, l2) {
  * @param {ListNode} head
  * @return {boolean}
  */
-var isPalindrome = function (head) {
+var isPalindrome = function(head) {
   // 先逆转一下，然后新的和旧的对比
   let oldList = JSON.parse(JSON.stringify(head))
   // 反转后的链表第一个节点
@@ -386,7 +378,7 @@ var isPalindrome = function (head) {
 }
 
 // 第二次，转成数组处理,性能好像不太好。。。。但也不算差
-var isPalindrome = function (head) {
+var isPalindrome = function(head) {
   // 先逆转一下，然后新的和旧的对比
 
   let arr = []
@@ -416,7 +408,7 @@ var isPalindrome = function (head) {
 
 > [返回导航](#链表)
 
->> 我的答案
+> > 我的答案
 
 ```js
 /**
@@ -433,30 +425,30 @@ var isPalindrome = function (head) {
  * @return {boolean}
  */
 var hasCycle = function(head) {
-    if (!head || !head.next) return false
-    let slow = head
-    let fast = head
+  if (!head || !head.next) return false
+  let slow = head
+  let fast = head
 
-    while (fast.next && fast.next.next) {
-      slow = slow.next
-      fast = fast.next.next
+  while (fast.next && fast.next.next) {
+    slow = slow.next
+    fast = fast.next.next
 
-      if (slow === fast) return true
-    }
+    if (slow === fast) return true
+  }
 
-    return false
-};
+  return false
+}
 
 // 方法2 哈希表
 var hasCycle = function(head) {
-    let hashTable = new Set()
+  let hashTable = new Set()
 
-    while (head !== null) {
-      if (hashTable.has(head)) return true
-      else hashTable.add(head)
+  while (head !== null) {
+    if (hashTable.has(head)) return true
+    else hashTable.add(head)
 
-      head = head.next
-    }
-    return false
-};
+    head = head.next
+  }
+  return false
+}
 ```
